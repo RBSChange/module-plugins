@@ -1,59 +1,57 @@
 <?php
 namespace Rbs\Plugins\Commands;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use Change\Commands\Events\Event;
 use Rbs\Plugins\Std\Signtool;
 
 /**
  * @name \Rbs\Plugins\Commands\Verify
  */
-class Verify extends \Change\Application\Console\ChangeCommand
+class Verify
 {
 	/**
+	 * @param Event $event
 	 */
-	protected function configure()
+	public function execute(Event $event)
 	{
-		$this->setDescription("Check signed plugin integrity");
-		$this->addOption('type', 't', InputOption::VALUE_OPTIONAL, 'type of plugin', 'module');
-		$this->addOption('vendor', 'e', InputOption::VALUE_OPTIONAL, 'vendor of the plugin', 'project');
-		$this->addArgument('name', InputArgument::REQUIRED, 'short name of the plugin');
-	}
+		$application = $event->getApplication();
+		$applicationServices = new \Change\Application\ApplicationServices($application);
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @throws \LogicException
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
-	{
-		// Code of you command here
-		if ($input->getOption('type') === "theme")
+		$type = $event->getParam('type');
+		$vendor = $event->getParam('vendor');
+		$name = $event->getParam('name');
+		try
 		{
-			$plugin = $this->getChangeApplicationServices()->getPluginManager()->getTheme($input->getOption('vendor'), $input->getArgument('name'));
-		}
-		else
-		{
-			$plugin = $this->getChangeApplicationServices()->getPluginManager()->getModule($input->getOption('vendor'), $input->getArgument('name'));
-		}
+			if ($type === "theme")
+			{
+				$plugin = $applicationServices->getPluginManager()->getTheme($vendor, $name);
+			}
+			else
+			{
+				$plugin = $applicationServices->getPluginManager()->getModule($vendor, $name);
+			}
 
-		if ($plugin === null)
-		{
-			throw new \RuntimeException("Plugin not found");
-		}
+			if ($plugin === null)
+			{
+				$event->addErrorMessage("Plugin not found.");
+				return;
+			}
 
-		$signtool = new Signtool($this->getChangeApplication());
-		$result = $signtool->verify($plugin);
-		if ($result)
-		{
-			$output->writeln("<info>Plugin is genuine!</info>");
+			$signTool = new Signtool($this->getChangeApplication());
+			$result = $signTool->verify($plugin);
+			if ($result)
+			{
+				$event->addInfoMessage('Plugin is genuine!');
+			}
+			else
+			{
+				$event->addErrorMessage('Plugin is not genuine.');
+			}
 		}
-		else
+		catch (\Exception $e)
 		{
-			$output->writeln("<error>Plugin is not genuine.</error>");
+			$applicationServices->getLogging()->exception($e);
+			$event->addErrorMessage($e->getMessage());
 		}
 	}
 }
