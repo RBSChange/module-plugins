@@ -37,7 +37,7 @@ class Verify
 				return;
 			}
 
-			$signTool = new Signtool($this->getChangeApplication());
+			$signTool = new Signtool($application);
 			$result = $signTool->verify($plugin);
 			if ($result)
 			{

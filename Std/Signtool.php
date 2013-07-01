@@ -46,7 +46,7 @@ class Signtool
 		$normalizedCertPath = (DIRECTORY_SEPARATOR == '/' ? \Zend\Uri\File::fromUnixPath(realpath($certPath)) : \Zend\Uri\File::fromWindowsPath(realpath($certPath)));
 		$path = $plugin->getBasePath();
 		$manifestPath = tempnam($this->application->getWorkspace()->tmpPath(), 'manifest');
-		$manifestInfo = $this->buildManifestInfo($path, $manifestInfo);
+		$manifestInfo = $this->buildManifestInfo($path);
 		File::write($manifestPath, Json::prettyPrint(Json::encode($manifestInfo)));
 		return openssl_pkcs7_sign(
 			$manifestPath,
