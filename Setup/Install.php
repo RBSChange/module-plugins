@@ -16,5 +16,15 @@ class Install
 		/* @var $config \Change\Configuration\EditableConfiguration */
 		$config = $application->getConfiguration();
 		$config->addPersistentEntry('Change/Events/Commands/Rbs_Plugins', '\\Rbs\\Plugins\\Commands\\ListenerAggregate');
+		$config->addPersistentEntry('Change/Events/Rbs/Admin/Rbs_Plugins', '\\Rbs\\Plugins\\Admin\\Register');
+		$config->addPersistentEntry('Change/Events/Http/Rest/Rbs_Plugins', '\\Rbs\\Plugins\\Http\\Rest\\ListenerAggregate');
+	}
+
+	/**
+	 * @param \Change\Plugins\Plugin $plugin
+	 */
+	public function finalize($plugin)
+	{
+		$plugin->setConfigurationEntry('locked', true);
 	}
 }

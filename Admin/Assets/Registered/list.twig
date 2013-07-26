@@ -1,0 +1,69 @@
+<div data-ng-controller="Rbs_Plugins_New_ListController">
+	<page-header sub-title="{{ i18nAttr('m.rbs.plugins.admin.registered-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
+	<table class="document-list table table-condensed table-bordered table-striped table-hover token">
+		<thead>
+		<tr>
+			<th data-ng-class="{'sorted':isSortedOn('type')}">
+				<a href="" data-ng-click="predicate = 'type'; reverse=!reverse">
+					{{ i18nAttr('m.rbs.plugins.admin.type', ['ucf']) }}
+				</a>
+				<i data-ng-if="!isSortedOn('type')" class="column-sort-indicator icon-sort"></i>
+				<i data-ng-if="isSortedOn('type')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
+			</th>
+			<th data-ng-class="{'sorted':isSortedOn('vendor')}">
+				<a href="" data-ng-click="predicate = 'vendor'; reverse=!reverse">
+					{{ i18nAttr('m.rbs.plugins.admin.vendor', ['ucf']) }}
+				</a>
+				<i data-ng-if="!isSortedOn('vendor')" class="column-sort-indicator icon-sort"></i>
+				<i data-ng-if="isSortedOn('vendor')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
+			</th>
+			<th data-ng-class="{'sorted':isSortedOn('shortName')}">
+				<a href="" data-ng-click="predicate = 'shortName'; reverse=!reverse">
+					{{ i18nAttr('m.rbs.plugins.admin.name', ['ucf']) }}
+				</a>
+				<i data-ng-if="!isSortedOn('shortName')" class="column-sort-indicator icon-sort"></i>
+				<i data-ng-if="isSortedOn('shortName')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
+			</th>
+			<th data-ng-class="{'sorted':isSortedOn('package')}">
+				<a href="" data-ng-click="predicate = 'package'; reverse=!reverse">
+					{{ i18nAttr('m.rbs.plugins.admin.package', ['ucf']) }}
+				</a>
+				<i data-ng-if="!isSortedOn('package')" class="column-sort-indicator icon-sort"></i>
+				<i data-ng-if="isSortedOn('package')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
+			</th>
+			<th data-ng-class="{'sorted':isSortedOn('registrationDate')}">
+				<a href="" data-ng-click="predicate = 'registrationDate'; reverse=!reverse">
+					{{ i18nAttr('m.rbs.plugins.admin.registration-date', ['ucf']) }}
+				</a>
+				<i data-ng-if="!isSortedOn('registrationDate')" class="column-sort-indicator icon-sort"></i>
+				<i data-ng-if="isSortedOn('registrationDate')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
+			</th>
+			<th><button class="btn btn-small" data-ng-click="verifyAll()">{{ i18nAttr('m.rbs.plugins.admin.verify-all', ['ucf']) }}</th>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-ng-repeat="plugin in plugins | orderBy:predicate:reverse" class="normal-row">
+			<td>(= plugin.type =)</td>
+			<td>(= plugin.vendor =)</td>
+			<td>(= plugin.shortName =)</td>
+			<td>(= plugin.package =)</td>
+			<td>(= plugin.registrationDate | date:'medium' =)</td>
+			<td>
+				<button class="btn btn-small" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified, 'btn-danger': plugin.invalid }">
+					<i class="icon-white icon-ok" data-ng-if="plugin.verified"></i>
+					{{ i18nAttr('m.rbs.plugins.admin.verify', ['ucf']) }}</button>
+			</td>
+			<td>
+				<button class="btn btn-success btn-small" data-ng-click="install(plugin)">
+					<i data-ng-if="plugin.onInstall" class="icon-white icon-spinner"></i>
+					{{ i18nAttr('m.rbs.plugins.admin.install', ['ucf']) }}
+				</button>
+			</td>
+			<td><button class="btn btn-danger btn-small" data-ng-click="deregister(plugin)">{{ i18nAttr('m.rbs.plugins.admin.deregister', ['ucf']) }}</button></td>
+
+		</tr>
+		</tbody>
+	</table>
+</div>

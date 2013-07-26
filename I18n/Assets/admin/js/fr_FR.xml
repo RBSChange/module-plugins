@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<i18n baseKey="m.rbs.plugins.admin.js" lcid="fr_FR">
+	<key id="module-name">plugins</key>
+	<key id="module-keywords">modules,plugins,themes</key>
+	<key id="invalid-signature">La signature du plugin {name} du fournisseur {vendor} et du type {type} est invalide, les erreurs : {errors}</key>
+</i18n>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<i18n baseKey="m.rbs.plugins.admin" lcid="fr_FR">
+	<key id="installed-plugin-list-sub-title">liste des plugins installés</key>
+	<key id="registered-plugin-list-sub-title">liste des plugins à installer</key>
+	<key id="new-plugin-list-sub-title">liste des nouveaux plugins</key>
+	<key id="plugin-list">plugins</key>
+	<key id="installed-list">installés</key>
+	<key id="registered-list">à installer</key>
+	<key id="new-list">nouveaux</key>
+	<key id="type">type</key>
+	<key id="vendor">fournisseur</key>
+	<key id="name">nom</key>
+	<key id="package">package</key>
+	<key id="registration-date">date d'enregistrement</key>
+	<key id="installed">configuré</key>
+	<key id="activated">activé</key>
+	<key id="deinstall">désinstaller</key>
+	<key id="install">installer</key>
+	<key id="verify">vérifier</key>
+	<key id="verify-all">tout vérifier</key>
+	<key id="register">enregistrer</key>
+	<key id="deregister">retirer</key>
+</i18n>

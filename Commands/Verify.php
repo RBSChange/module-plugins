@@ -39,7 +39,7 @@ class Verify
 
 			$signTool = new Signtool($application);
 			$result = $signTool->verify($plugin);
-			if ($result)
+			if ($result['valid'])
 			{
 				$event->addInfoMessage('Plugin is genuine!');
 			}

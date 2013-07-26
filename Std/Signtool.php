@@ -60,6 +60,7 @@ class Signtool
 	/**
 	 * @param Plugin $plugin
 	 * @throws \RuntimeException
+	 * @return array
 	 */
 	public function verify(Plugin $plugin, &$parsingResult = array())
 	{
@@ -84,10 +85,6 @@ class Signtool
 		}
 		$manifestInfo = $this->buildManifestInfo($plugin->getBasePath());
 		$signedManifestInfo = Json::decode(file_get_contents($manifestPath), Json::TYPE_ARRAY);
-		if ($result !== true)
-		{
-			$parsingResult['error'] = array('code' => -2, 'message' => 'The plugin has been tampered');
-		}
 
 		foreach ($signedManifestInfo as $relativePath => $checksum)
 		{
@@ -102,7 +99,9 @@ class Signtool
 			$parsingResult['error'] = array('code' => -2, 'message' => 'The plugin has been tampered');
 		}
 		$parsingResult['certificate'] = openssl_x509_parse(file_get_contents($certificatePath));
-		return !isset($parsingResult['error']);
+		$result = array('valid' => !isset($parsingResult['error']));
+		$result['parsing'] = $parsingResult;
+		return $result;
 	}
 
 	/**
