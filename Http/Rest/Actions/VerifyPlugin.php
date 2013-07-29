@@ -1,6 +1,7 @@
 <?php
 namespace Rbs\Plugins\Http\Rest\Actions;
 
+use Change\Plugins\Plugin;
 use Rbs\Plugins\Std\Signtool;
 
 use Change\Http\Rest\Result\ArrayResult;
@@ -26,23 +27,30 @@ class VerifyPlugin
 		$signResult = array('errors' => array());
 		try
 		{
-			if ($type === "theme")
+			//search first on compiled plugins
+			$plugin = $applicationServices->getPluginManager()->getPlugin($type, $vendor, $name);
+			//if nothing match, search on unregistered plugins
+			if ($plugin === null)
 			{
-				$plugin = $applicationServices->getPluginManager()->getTheme($vendor, $name);
+				$unregisteredPlugins = $applicationServices->getPluginManager()->getUnregisteredPlugins();
+				$result = array_filter($unregisteredPlugins, function(Plugin $plugin) use ($type, $vendor, $name) {
+					return $plugin->getType() === $type && $plugin->getVendor() === $vendor && $plugin->getShortName() === $name;
+				});
+				$plugin = array_pop($result);
 			}
-			else
-			{
-				$plugin = $applicationServices->getPluginManager()->getModule($vendor, $name);
-			}
-
 			if ($plugin === null)
 			{
 				$signResult['errors'][] = 'Plugin not found.';
-				return;
 			}
-
-			$signTool = new Signtool($application);
-			$signResult = array_merge($signResult, $signTool->verify($plugin));
+			else
+			{
+				$signTool = new Signtool($application);
+				$signResult = array_merge($signResult, $signTool->verify($plugin));
+				if (isset($signResult['parsing']['error']['message']))
+				{
+					$signResult['errors'][] = $signResult['parsing']['error']['message'];
+				}
+			}
 		}
 		catch (\Exception $e)
 		{

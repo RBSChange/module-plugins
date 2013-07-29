@@ -8,75 +8,34 @@
 	 * Controller for list.
 	 *
 	 * @param $scope
-	 * @param REST
-	 * @param $http
 	 * @param Breadcrumb
 	 * @param MainMenu
 	 * @param i18n
 	 * @param ArrayUtils
+	 * @param Plugins
 	 * @constructor
 	 */
-	function ListController($scope, REST, $http, Breadcrumb, MainMenu, i18n, ArrayUtils)
+	function ListController($scope, Breadcrumb, MainMenu, i18n, ArrayUtils, Plugins)
 	{
 		Breadcrumb.resetLocation([
 			[i18n.trans('m.rbs.plugins.admin.js.module-name | ucf'), "Rbs/Plugins/Installed"]
 		]);
 
-		var url = REST.getBaseUrl('plugins/installedPlugins');
-		$http.get(url).success(function (data){
-				$scope.plugins = data;
-			}
-		);
+		$scope.plugins = Plugins.getInstalled().then(function (data){
+			$scope.plugins = data;
+		});
 
-		$scope.verify = function (plugin){
-			var url = REST.getBaseUrl('plugins/verifyPlugin?type=' + plugin.type + '&vendor=' + plugin.vendor +
-				'&name=' + plugin.shortName);
-			$http.get(url).success(function (data){
-					if (data.errors.length == 0)
-					{
-						plugin.verified = data.valid;
-					}
-					else
-					{
-						var i18nData = {
-							'name': plugin.shortName,
-							'vendor': plugin.vendor,
-							'type': plugin.type,
-							'errors': data.errors.join('\n')
-						};
-						alert(i18n.trans('m.rbs.plugins.admin.js.invalid-signature | ucf', i18nData));
-						plugin.invalid = true;
-					}
-				}
-			);
-		};
+		$scope.verify = function (plugin){ Plugins.verify(plugin).then(function (pluginInfos){
+			$scope.pluginInfos = pluginInfos;
+		}, function (pluginInfos){
+			$scope.pluginInfos = pluginInfos;
+		}) };
 
-		$scope.verifyAll = function (){
-			angular.forEach($scope.plugins, function(plugin){
-				var url = REST.getBaseUrl('plugins/verifyPlugin?type=' + plugin.type + '&vendor=' + plugin.vendor +
-					'&name=' + plugin.shortName);
-				$http.get(url).success(function (data){
-						if (data.errors.length == 0)
-						{
-							plugin.verified = data.valid;
-						}
-						else
-						{
-							plugin.invalid = true;
-						}
-					}
-				);
-			});
-		};
+		$scope.verifyAll = function (){ Plugins.verifyAll($scope.plugins) };
 
-		$scope.activateChange = function (plugin){
-			var url = REST.getBaseUrl('plugins/changePluginActivation');
-			$http.post(url, { 'plugin': plugin })
-		};
+		$scope.activateChange = function (plugin){ Plugins.activateChange(plugin); };
 
-		$scope.deinstall = function (plugin){
-			var url = REST.getBaseUrl('plugins/deinstallPlugin');
-			$http.post(url, { 'plugin': plugin }).success(function (){
+		$scope.deinstall = function (plugin){ Plugins.deinstall(plugin).then(function (){
 				ArrayUtils.removeValue($scope.plugins, plugin);
 			});
 		};
@@ -89,7 +48,7 @@
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}
 
-	ListController.$inject = ['$scope', 'RbsChange.REST', '$http', 'RbsChange.Breadcrumb', 'RbsChange.MainMenu', 'RbsChange.i18n', 'RbsChange.ArrayUtils'];
+	ListController.$inject = ['$scope', 'RbsChange.Breadcrumb', 'RbsChange.MainMenu', 'RbsChange.i18n', 'RbsChange.ArrayUtils', 'RbsChange.Plugins'];
 	app.controller('Rbs_Plugins_Installed_ListController', ListController);
 
 })();

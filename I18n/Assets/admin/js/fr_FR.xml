@@ -2,5 +2,9 @@
 <i18n baseKey="m.rbs.plugins.admin.js" lcid="fr_FR">
 	<key id="module-name">plugins</key>
 	<key id="module-keywords">modules,plugins,themes</key>
-	<key id="invalid-signature">La signature du plugin {name} du fournisseur {vendor} et du type {type} est invalide, les erreurs : {errors}</key>
+	<key id="invalid-signature" format="html"><![CDATA[<ul class="unstyled"><li>La signature du plugin {name} du fournisseur {vendor} et du type {type} est invalide, les erreurs :</li><li>{errors}</li></ul>]]></key>
+	<key id="valid-signature" format="html"><![CDATA[<ul class="unstyled"><li>La signature du plugin {name} du fournisseur {vendor} et du type {type} est valide.</li>
+	<li>Le certificat qui a signé ce module a été procuré pour {subject} par l'instance de certification {CN} que vous pouvez contacter via cette e-mail : {emailAddress}.</li>
+	<li>Ce certificat est valide depuis le {validFrom} et jusqu'au {validTo}.</li></ul>]]>
+	</key>
 </i18n>

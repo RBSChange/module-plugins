@@ -23,6 +23,7 @@ class Register implements ListenerAggregateInterface
 
 			$body = array('
 	<script type="text/javascript" src="Rbs/Plugins/js/admin.js">​</script>
+	<script type="text/javascript" src="Rbs/Plugins/js/services/plugins.js">​</script>
 	<script type="text/javascript" src="Rbs/Plugins/Installed/controllers.js">​</script>
 	<script type="text/javascript" src="Rbs/Plugins/Registered/controllers.js">​</script>
 	<script type="text/javascript" src="Rbs/Plugins/New/controllers.js">​</script>');

@@ -19,7 +19,7 @@ class ChangePluginActivation
 		{
 			$pluginInfos = $event->getRequest()->getPost('plugin');
 			$pm = $event->getApplicationServices()->getPluginManager();
-			$plugin = $pm->getPlugin($pluginInfos['type'], $pluginInfos['vendor'], $pluginInfos['name']);
+			$plugin = $pm->getPlugin($pluginInfos['type'], $pluginInfos['vendor'], $pluginInfos['shortName']);
 			$plugin->setActivated($pluginInfos['activated']);
 			$pm->update($plugin);
 			$pm->compile();

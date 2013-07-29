@@ -1,5 +1,9 @@
 <div data-ng-controller="Rbs_Plugins_Installed_ListController">
 	<page-header sub-title="{{ i18nAttr('m.rbs.plugins.admin.installed-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
+	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-error': pluginInfos.error }" data-ng-if="pluginInfos">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<span data-ng-bind-html-unsafe="pluginInfos.message"></span>
+	</div>
 	<table class="document-list table table-condensed table-bordered table-striped table-hover token">
 		<thead>
 		<tr>
