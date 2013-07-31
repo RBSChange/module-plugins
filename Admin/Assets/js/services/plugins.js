@@ -40,6 +40,7 @@
 		};
 
 		this.verify = function (plugin){
+			plugin.verified = false;
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('plugins/verifyPlugin?type=' + plugin.type + '&vendor=' + plugin.vendor +
 				'&name=' + plugin.shortName);
@@ -59,6 +60,7 @@
 							'validTo': $filter('date')(data.parsing.certificate.validTo_time_t * 1000)
 						};
 						pluginInfos.success = true;
+						pluginInfos.errors = false;
 						pluginInfos.message = i18n.trans('m.rbs.plugins.admin.js.valid-signature | ucf', i18nSuccessData);
 						deffered.resolve(pluginInfos);
 					}
@@ -68,10 +70,10 @@
 						var i18nErrorData = {
 							'name': plugin.shortName,
 							'vendor': plugin.vendor,
-							'type': plugin.type,
-							'errors': data.errors.join('\n')
+							'type': plugin.type
 						};
-						pluginInfos.error = true;
+						pluginInfos.success = false;
+						pluginInfos.errors = data.errors;
 						pluginInfos.message = i18n.trans('m.rbs.plugins.admin.js.invalid-signature | ucf', i18nErrorData);
 						deffered.reject(pluginInfos);
 					}
@@ -84,6 +86,7 @@
 
 		this.verifyAll = function (plugins){
 			angular.forEach(plugins, function(plugin){
+				plugin.verified = false;
 				var url = REST.getBaseUrl('plugins/verifyPlugin?type=' + plugin.type + '&vendor=' + plugin.vendor +
 					'&name=' + plugin.shortName);
 				$http.get(url).success(function (data){
