@@ -15,6 +15,8 @@ class DeregisterPlugin
 	 */
 	public function execute($event)
 	{
+		$result = new DocumentResult();
+
 		if ($event->getRequest()->getPost('plugin'))
 		{
 			$pluginInfos = $event->getRequest()->getPost('plugin');
@@ -22,10 +24,12 @@ class DeregisterPlugin
 			$plugin = $pm->getPlugin($pluginInfos['type'], $pluginInfos['vendor'], $pluginInfos['shortName']);
 			$pm->deregister($plugin);
 			$pm->compile();
+			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
 		}
-
-		$result = new DocumentResult();
-		$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
+		else
+		{
+			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_500);
+		}
 
 		$event->setResult($result);
 	}

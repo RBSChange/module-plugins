@@ -17,50 +17,57 @@ class VerifyPlugin
 	 */
 	public function execute(\Change\Http\Event $event)
 	{
-		$applicationServices = $event->getApplicationServices();
-		$application = $applicationServices->getApplication();
+		$result = new ArrayResult();
 
 		$type = $event->getRequest()->getQuery('type');
 		$vendor = $event->getRequest()->getQuery('vendor');
 		$name = $event->getRequest()->getQuery('name');
 
-		$signResult = array('errors' => array());
-		try
+		if ($type !== '' && $vendor !== '' && $name !== '')
 		{
-			//search first on compiled plugins
-			$plugin = $applicationServices->getPluginManager()->getPlugin($type, $vendor, $name);
-			//if nothing match, search on unregistered plugins
-			if ($plugin === null)
+			$applicationServices = $event->getApplicationServices();
+			$application = $applicationServices->getApplication();
+
+			$signResult = array('errors' => array());
+			try
 			{
-				$unregisteredPlugins = $applicationServices->getPluginManager()->getUnregisteredPlugins();
-				$result = array_filter($unregisteredPlugins, function(Plugin $plugin) use ($type, $vendor, $name) {
-					return $plugin->getType() === $type && $plugin->getVendor() === $vendor && $plugin->getShortName() === $name;
-				});
-				$plugin = array_pop($result);
-			}
-			if ($plugin === null)
-			{
-				$signResult['errors'][] = 'Plugin not found.';
-			}
-			else
-			{
-				$signTool = new Signtool($application);
-				$signResult = array_merge($signResult, $signTool->verify($plugin));
-				if (isset($signResult['parsing']['error']['message']))
+				//search first on compiled plugins
+				$plugin = $applicationServices->getPluginManager()->getPlugin($type, $vendor, $name);
+				//if nothing match, search on unregistered plugins
+				if ($plugin === null)
 				{
-					$signResult['errors'][] = $signResult['parsing']['error']['message'];
+					$unregisteredPlugins = $applicationServices->getPluginManager()->getUnregisteredPlugins();
+					$plugins = array_filter($unregisteredPlugins, function(Plugin $plugin) use ($type, $vendor, $name) {
+						return $plugin->getType() === $type && $plugin->getVendor() === $vendor && $plugin->getShortName() === $name;
+					});
+					$plugin = array_pop($plugins);
+				}
+				if ($plugin === null)
+				{
+					$signResult['errors'][] = 'Plugin not found.';
+				}
+				else
+				{
+					$signTool = new Signtool($application);
+					$signResult = array_merge($signResult, $signTool->verify($plugin));
+					if (isset($signResult['parsing']['error']['message']))
+					{
+						$signResult['errors'][] = $signResult['parsing']['error']['message'];
+					}
 				}
 			}
+			catch (\Exception $e)
+			{
+				$applicationServices->getLogging()->exception($e);
+				$signResult['errors'][] = $e->getMessage();
+			}
+			$result->setArray($signResult);
+			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
 		}
-		catch (\Exception $e)
+		else
 		{
-			$applicationServices->getLogging()->exception($e);
-			$signResult['errors'][] = $e->getMessage();
+			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_500);
 		}
-
-		$result = new ArrayResult();
-		$result->setArray($signResult);
-		$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
 
 		$event->setResult($result);
 	}

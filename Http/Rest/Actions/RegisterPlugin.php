@@ -16,6 +16,8 @@ class RegisterPlugin
 	 */
 	public function execute($event)
 	{
+		$result = new DocumentResult();
+
 		if ($event->getRequest()->getPost('plugin'))
 		{
 			$pluginInfos = $event->getRequest()->getPost('plugin');
@@ -24,10 +26,12 @@ class RegisterPlugin
 			$plugin->setPackage($pluginInfos['package']);
 			$pm->register($plugin);
 			$pm->compile();
+			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
 		}
-
-		$result = new DocumentResult();
-		$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
+		else
+		{
+			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_500);
+		}
 
 		$event->setResult($result);
 	}
