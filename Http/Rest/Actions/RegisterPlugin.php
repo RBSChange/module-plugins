@@ -1,7 +1,7 @@
 <?php
 namespace Rbs\Plugins\Http\Rest\Actions;
 
-use Change\Http\Rest\Result\DocumentResult;
+use Change\Http\Rest\Result\ArrayResult;
 use Change\Plugins\Plugin;
 use Zend\Http\Response as HttpResponse;
 
@@ -16,7 +16,7 @@ class RegisterPlugin
 	 */
 	public function execute($event)
 	{
-		$result = new DocumentResult();
+		$result = new ArrayResult();
 
 		if ($event->getRequest()->getPost('plugin'))
 		{

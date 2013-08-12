@@ -1,7 +1,7 @@
 <?php
 namespace Rbs\Plugins\Http\Rest\Actions;
 
-use Change\Http\Rest\Result\DocumentResult;
+use Change\Http\Rest\Result\ArrayResult;
 use Zend\Http\Response as HttpResponse;
 
 /**
@@ -15,7 +15,7 @@ class ChangePluginActivation
 	 */
 	public function execute($event)
 	{
-		$result = new DocumentResult();
+		$result = new ArrayResult();
 
 		if ($event->getRequest()->getPost('plugin'))
 		{
