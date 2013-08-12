@@ -28,18 +28,24 @@
 
 		$scope.reloadPlugins();
 
-		$scope.pluginList = {
-			'verify': function (plugin){ Plugins.verify(plugin).then(function (pluginInfos){
+		$scope.verify = function (plugin){ Plugins.verify(plugin).then(function (pluginInfos){
 				$scope.pluginInfos = pluginInfos;
 			}, function (pluginInfos){
-				$scope.pluginInfos = pluginInfos;
-			}); },
-			'activateChange': function (plugin){ Plugins.activateChange(plugin); },
-			'deinstall': function (plugin){ Plugins.deinstall(plugin).then(function (){
-				$scope.reloadPlugins();
-			}); },
-			'verifyAll': function (){ Plugins.verifyAll($scope.plugins) }
-		};
+			$scope.pluginInfos = pluginInfos;
+		}); };
+
+		$scope.activateChange = function (plugin){ Plugins.activateChange(plugin); };
+
+		$scope.deinstall = function (plugin){ Plugins.deinstall(plugin).then(function (){
+			$scope.reloadPlugins();
+		}); };
+
+		$scope.verifyAll = function (){ Plugins.verifyAll($scope.plugins) };
+
+		//sort
+		$scope.predicate = 'vendor';
+		$scope.reverse = false;
+		$scope.isSortedOn = function (column) { return column == $scope.predicate; };
 
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}
