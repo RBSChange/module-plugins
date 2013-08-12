@@ -39,10 +39,9 @@
 			}); },
 			'deregister': function (plugin){ Plugins.deregister(plugin).then(function (){
 				$scope.reloadPlugins();
-			}); }
+			}); },
+			'verifyAll': function (){ Plugins.verifyAll($scope.plugins) }
 		};
-
-		$scope.verifyAll = function (){ Plugins.verifyAll($scope.plugins) };
 
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}

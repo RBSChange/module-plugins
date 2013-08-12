@@ -7,15 +7,13 @@
 			<li>(= error =)</li>
 		</ul>
 	</div>
-	<!-- TODO Replace this button by an action coded in controller List actions -->
-	<button class="btn btn-small pull-right" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button><br />
 	<rbs-document-list data-dlid="DLRbsPluginsRegisteredList"
 		collection="plugins"
 		selectable="false"
 		extend="pluginList"
 		modification-date="false"
-		on-reload="reloadPlugins()"
-		actions="">
+		on-reload="reloadPlugins()">
+		<action name="verifyAll" label="{{ i18nAttr('m.rbs.plugins.admin.verify-all', ['ucf']) }}"></action>
 		<column name="type" label="{{ i18nAttr('m.rbs.plugins.admin.type', ['ucf']) }}"></column>
 		<column name="vendor" local-sort="true" label="{{ i18nAttr('m.rbs.plugins.admin.vendor', ['ucf']) }}"></column>
 		<column name="shortName" local-sort="true" label="{{ i18nAttr('m.rbs.plugins.admin.name', ['ucf']) }}"></column>

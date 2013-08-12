@@ -37,10 +37,9 @@
 			'activateChange': function (plugin){ Plugins.activateChange(plugin); },
 			'deinstall': function (plugin){ Plugins.deinstall(plugin).then(function (){
 				$scope.reloadPlugins();
-			}); }
+			}); },
+			'verifyAll': function (){ Plugins.verifyAll($scope.plugins) }
 		};
-
-		$scope.verifyAll = function (){ Plugins.verifyAll($scope.plugins) };
 
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}
