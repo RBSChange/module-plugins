@@ -2,7 +2,7 @@
 	<page-header sub-title="{{ i18nAttr('m.rbs.plugins.admin.new-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
 	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-error': pluginInfos.errors }" data-ng-if="pluginInfos">
 		<button type="button" class="close" data-dismiss="alert">×</button>
-		<span data-ng-bind-html-unsafe="pluginInfos.message"></span>
+		<span ng-bind-html="pluginInfos.message"></span>
 		<ul data-ng-repeat="error in pluginInfos.errors">
 			<li>(= error =)</li>
 		</ul>
