@@ -20,12 +20,27 @@ class ChangePluginActivation
 		if ($event->getRequest()->getPost('plugin'))
 		{
 			$pluginInfos = $event->getRequest()->getPost('plugin');
+			$tm = $event->getApplicationServices()->getTransactionManager();
 			$pm = $event->getApplicationServices()->getPluginManager();
 			$plugin = $pm->getPlugin($pluginInfos['type'], $pluginInfos['vendor'], $pluginInfos['shortName']);
+			if (isset($plugin->getConfiguration()['locked']) && $plugin->getConfiguration()['locked'] && !$pluginInfos['activated'])
+			{
+				throw new \InvalidArgumentException('Plugin is locked, unable to deactivate');
+			}
 			$plugin->setActivated($pluginInfos['activated']);
-			$pm->update($plugin);
-			$pm->compile();
-			$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
+			try
+			{
+				$tm->begin();
+				$pm->update($plugin);
+				$tm->commit();
+				$pm->compile();
+				$result->setHttpStatusCode(HttpResponse::STATUS_CODE_200);
+			}
+			catch(\Exception $e)
+			{
+				$tm->rollBack($e);
+				$result->setHttpStatusCode(HttpResponse::STATUS_CODE_500);
+			}
 		}
 		else
 		{

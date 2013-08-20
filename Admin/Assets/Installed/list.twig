@@ -63,7 +63,7 @@
 				<td>(= plugin.shortName =)</td>
 				<td>(= plugin.package =)</td>
 				<td>(= plugin.registrationDate | date:'medium' =)</td>
-				<td><switch data-ng-model="plugin.activated" data-ng-change="activateChange(plugin)"></switch></td>
+				<td><switch data-ng-model="plugin.activated" data-ng-change="activateChange(plugin)" ng-disabled="plugin.configuration.locked"></switch></td>
 				<td>
 					<button class="btn btn-small" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified, 'btn-danger': plugin.invalid }">
 						<i class="icon-white icon-ok" data-ng-if="plugin.verified"></i>
