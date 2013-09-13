@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<i18n baseKey="m.rbs.plugins.admin.js" lcid="fr_FR">
+	<key id="module-name">plugins</key>
+	<key id="module-keywords">modules,plugins,themes</key>
+	<key id="invalid-signature" format="html"><![CDATA[<ul class="unstyled"><li>Signature for plugin {name} from {vendor} and of type {type} is not valid.</li></ul>]]></key>
+	<key id="valid-signature" format="html"><![CDATA[<ul class="unstyled"><li>>Signature for plugin {name} from {vendor} and of type {type} is valid.</li>
+	<li>This module has been signed with a certificate attributed to {subject} by {CN} with the following e-mail address {emailAddress}.</li>
+	<li>This certificate is valid between {validFrom} and {validTo}.</li></ul>]]>
+	</key>
+</i18n>
