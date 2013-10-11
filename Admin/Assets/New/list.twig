@@ -38,7 +38,7 @@
 					<i data-ng-if="!isSortedOn('package')" class="column-sort-indicator icon-sort"></i>
 					<i data-ng-if="isSortedOn('package')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
 				</th>
-				<th><button class="btn btn-small" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
+				<th><button class="btn btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -49,11 +49,11 @@
 				<td>(= plugin.shortName =)</td>
 				<td>(= plugin.package =)</td>
 				<td>
-					<button class="btn btn-small" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified, 'btn-danger': plugin.invalid }">
+					<button class="btn btn-sm" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified, 'btn-danger': plugin.invalid }">
 						<i class="icon-white icon-ok" data-ng-if="plugin.verified"></i>
 						{{ i18n('m.rbs.plugins.admin.verify', ['ucf']) }}</button>
 				</td>
-				<td><button class="btn btn-small btn-success" data-ng-click="register(plugin)">{{ i18n('m.rbs.plugins.admin.register', ['ucf']) }}</button></td>
+				<td><button class="btn btn-sm btn-success" data-ng-click="register(plugin)">{{ i18n('m.rbs.plugins.admin.register', ['ucf']) }}</button></td>
 			</tr>
 		</tbody>
 	</table>
