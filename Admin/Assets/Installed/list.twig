@@ -1,5 +1,5 @@
 <div data-ng-controller="Rbs_Plugins_Installed_ListController">
-	<page-header sub-title="{{ i18nAttr('m.rbs.plugins.admin.installed-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
+	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.installed-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
 	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-error': pluginInfos.errors }" data-ng-if="pluginInfos">
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<span ng-bind-html="pluginInfos.message"></span>
@@ -52,7 +52,7 @@
 					<i data-ng-if="!isSortedOn('activated')" class="column-sort-indicator icon-sort"></i>
 					<i data-ng-if="isSortedOn('activated')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
 				</th>
-				<th><button class="btn btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
+				<th align="center"><button class="btn btn-default btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -64,13 +64,14 @@
 				<td>(= plugin.package =)</td>
 				<td>(= plugin.registrationDate | date:'medium' =)</td>
 				<td><switch data-ng-model="plugin.activated" data-ng-change="activateChange(plugin)" ng-disabled="plugin.configuration.locked"></switch></td>
-				<td>
+				<td align="center">
 					<button class="btn btn-sm" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified, 'btn-danger': plugin.invalid }">
 						<i class="icon-white icon-ok" data-ng-if="plugin.verified"></i>
 						{{ i18n('m.rbs.plugins.admin.verify', ['ucf']) }}</button>
 				</td>
-				<td><button data-ng-if="!plugin.configuration.locked" class="btn btn-danger btn-sm" data-ng-click="deinstall(plugin)">{{ i18n('m.rbs.plugins.admin.deinstall', ['ucf']) }}</td>
-
+				<td align="center">
+					<button data-ng-if="!plugin.configuration.locked" class="btn btn-danger btn-sm" data-ng-click="deinstall(plugin)">{{ i18n('m.rbs.plugins.admin.deinstall', ['ucf']) }}</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>

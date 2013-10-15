@@ -1,5 +1,5 @@
 <div data-ng-controller="Rbs_Plugins_New_ListController">
-	<page-header sub-title="{{ i18nAttr('m.rbs.plugins.admin.registered-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
+	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.registered-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
 	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-error': pluginInfos.errors }" data-ng-if="pluginInfos">
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<span ng-bind-html="pluginInfos.message"></span>
@@ -46,7 +46,7 @@
 					<i data-ng-if="!isSortedOn('registrationDate')" class="column-sort-indicator icon-sort"></i>
 					<i data-ng-if="isSortedOn('registrationDate')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
 				</th>
-				<th><button class="btn btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</th>
+				<th align="center"><button class="btn btn-default btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -63,14 +63,15 @@
 						<i class="icon-white icon-ok" data-ng-if="plugin.verified"></i>
 						{{ i18n('m.rbs.plugins.admin.verify', ['ucf']) }}</button>
 				</td>
-				<td>
+				<td align="center">
 					<button class="btn btn-success btn-sm" data-ng-click="install(plugin)">
 						<i data-ng-if="plugin.onInstall" class="icon-white icon-spinner"></i>
 						{{ i18n('m.rbs.plugins.admin.install', ['ucf']) }}
 					</button>
 				</td>
-				<td><button class="btn btn-danger btn-sm" data-ng-click="deregister(plugin)">{{ i18n('m.rbs.plugins.admin.deregister', ['ucf']) }}</button></td>
-
+				<td align="center">
+					<button class="btn btn-danger btn-sm" data-ng-click="deregister(plugin)">{{ i18n('m.rbs.plugins.admin.deregister', ['ucf']) }}</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>

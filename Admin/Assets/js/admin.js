@@ -9,21 +9,20 @@
 		// Plugins
 
 		. when(
-			'/Rbs/Plugins',
+			'/Rbs/Plugins/',
+			{
+				redirectTo : '/Rbs/Plugins/Installed/'
+			})
+
+			. when(
+			'/Rbs/Plugins/Installed/',
 			{
 				templateUrl : 'Rbs/Plugins/Installed/list.twig',
 				reloadOnSearch : false
 			})
 
 			. when(
-			'/Rbs/Plugins/Installed',
-			{
-				templateUrl : 'Rbs/Plugins/Installed/list.twig',
-				reloadOnSearch : false
-			})
-
-			. when(
-			'/Rbs/Plugins/Registered',
+			'/Rbs/Plugins/Registered/',
 			{
 				templateUrl : 'Rbs/Plugins/Registered/list.twig',
 				reloadOnSearch : false

@@ -1,5 +1,5 @@
 <div data-ng-controller="Rbs_Plugins_Registered_ListController">
-	<page-header sub-title="{{ i18nAttr('m.rbs.plugins.admin.new-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
+	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.new-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
 	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-error': pluginInfos.errors }" data-ng-if="pluginInfos">
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<span ng-bind-html="pluginInfos.message"></span>
@@ -38,7 +38,7 @@
 					<i data-ng-if="!isSortedOn('package')" class="column-sort-indicator icon-sort"></i>
 					<i data-ng-if="isSortedOn('package')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
 				</th>
-				<th><button class="btn btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
+				<th align="center"><button class="btn btn-default btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -48,12 +48,14 @@
 				<td>(= plugin.vendor =)</td>
 				<td>(= plugin.shortName =)</td>
 				<td>(= plugin.package =)</td>
-				<td>
+				<td align="center">
 					<button class="btn btn-sm" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified, 'btn-danger': plugin.invalid }">
 						<i class="icon-white icon-ok" data-ng-if="plugin.verified"></i>
 						{{ i18n('m.rbs.plugins.admin.verify', ['ucf']) }}</button>
 				</td>
-				<td><button class="btn btn-sm btn-success" data-ng-click="register(plugin)">{{ i18n('m.rbs.plugins.admin.register', ['ucf']) }}</button></td>
+				<td align="center">
+					<button class="btn btn-sm btn-success" data-ng-click="register(plugin)">{{ i18n('m.rbs.plugins.admin.register', ['ucf']) }}</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
