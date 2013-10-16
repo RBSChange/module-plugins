@@ -39,8 +39,7 @@ class PluginsResolver
 	 */
 	public function getNextNamespace($event, $namespaceParts)
 	{
-		return array('installedPlugins', 'registeredPlugins', 'newPlugins', 'verifyPlugin', 'changePluginActivation',
-			'registerPlugin', 'deregisterPlugin', 'deinstallPlugin', 'installPlugin');
+		return array('installedPlugins', 'registeredPlugins', 'newPlugins');
 	}
 
 	/**
@@ -92,66 +91,6 @@ class PluginsResolver
 			else if ($actionName === 'newPlugins')
 			{
 				$action = new GetNewPlugins();
-				$event->setAction(function($event) use($action) {$action->execute($event);});
-				$authorisation = function() use ($event)
-				{
-					return $event->getPermissionsManager()->isAllowed('Administrator');
-				};
-				$event->setAuthorization($authorisation);
-			}
-			else if ($actionName === 'verifyPlugin')
-			{
-				$action = new VerifyPlugin();
-				$event->setAction(function($event) use($action) {$action->execute($event);});
-				$authorisation = function() use ($event)
-				{
-					return $event->getPermissionsManager()->isAllowed('Administrator');
-				};
-				$event->setAuthorization($authorisation);
-			}
-			else if ($actionName === 'changePluginActivation')
-			{
-				$action = new ChangePluginActivation();
-				$event->setAction(function($event) use($action) {$action->execute($event);});
-				$authorisation = function() use ($event)
-				{
-					return $event->getPermissionsManager()->isAllowed('Administrator');
-				};
-				$event->setAuthorization($authorisation);
-			}
-			else if ($actionName === 'registerPlugin')
-			{
-				$action = new RegisterPlugin();
-				$event->setAction(function($event) use($action) {$action->execute($event);});
-				$authorisation = function() use ($event)
-				{
-					return $event->getPermissionsManager()->isAllowed('Administrator');
-				};
-				$event->setAuthorization($authorisation);
-			}
-			else if ($actionName === 'deregisterPlugin')
-			{
-				$action = new DeregisterPlugin();
-				$event->setAction(function($event) use($action) {$action->execute($event);});
-				$authorisation = function() use ($event)
-				{
-					return $event->getPermissionsManager()->isAllowed('Administrator');
-				};
-				$event->setAuthorization($authorisation);
-			}
-			else if ($actionName === 'deinstallPlugin')
-			{
-				$action = new DeinstallPlugin();
-				$event->setAction(function($event) use($action) {$action->execute($event);});
-				$authorisation = function() use ($event)
-				{
-					return $event->getPermissionsManager()->isAllowed('Administrator');
-				};
-				$event->setAuthorization($authorisation);
-			}
-			else if ($actionName === 'installPlugin')
-			{
-				$action = new InstallPlugin();
 				$event->setAction(function($event) use($action) {$action->execute($event);});
 				$authorisation = function() use ($event)
 				{

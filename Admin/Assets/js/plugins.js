@@ -105,8 +105,8 @@
 
 		this.register = function (plugin){
 			var deffered = $q.defer();
-			var url = REST.getBaseUrl('plugins/registerPlugin');
-			$http.post(url, { 'plugin': plugin }).success(function (){
+			var url = REST.getBaseUrl('commands/change/register-plugin');
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
 				deffered.resolve();
 			});
 			return deffered.promise;
@@ -114,8 +114,8 @@
 
 		this.deregister = function (plugin){
 			var deffered = $q.defer();
-			var url = REST.getBaseUrl('plugins/deregisterPlugin');
-			$http.post(url, { 'plugin': plugin }).success(function (){
+			var url = REST.getBaseUrl('commands/change/deregister-plugin');
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
 				deffered.resolve();
 			});
 			return deffered.promise;
@@ -124,8 +124,8 @@
 		this.install = function (plugin){
 			var deffered = $q.defer();
 			plugin.onInstall = true;
-			var url = REST.getBaseUrl('plugins/installPlugin');
-			$http.post(url, { 'plugin': plugin }).success(function (){
+			var url = REST.getBaseUrl('commands/change/install-plugin');
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
 				deffered.resolve();
 			});
 			return deffered.promise;
@@ -133,16 +133,17 @@
 
 		this.deinstall = function (plugin){
 			var deffered = $q.defer();
-			var url = REST.getBaseUrl('plugins/deinstallPlugin');
-			$http.post(url, { 'plugin': plugin }).success(function (){
+			var url = REST.getBaseUrl('commands/change/deinstall-plugin');
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
 				deffered.resolve();
 			});
 			return deffered.promise;
 		};
 
 		this.activateChange = function (plugin){
-			var url = REST.getBaseUrl('plugins/changePluginActivation');
-			$http.post(url, { 'plugin': plugin })
+			var base = plugin.activated ? 'commands/change/disable-plugin' : 'commands/change/enable-plugin';
+			var url = REST.getBaseUrl(base);
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName });
 		};
 	}
 

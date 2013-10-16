@@ -17,12 +17,11 @@ class GetRegisteredPlugins
 	{
 		$pm = $event->getApplicationServices()->getPluginManager();
 		$array = array();
-		$i = 0;
 		foreach($pm->getRegisteredPlugins() as $plugin)
 		{
-			$array[] = $plugin->toArray();
-			$array[$i]['registrationDate'] = $array[$i]['registrationDate']->format(\DateTime::ISO8601);
-			$i++;
+			$data = $plugin->toArray();
+			$data['registrationDate'] = $data['registrationDate']->format(\DateTime::ISO8601);
+			$array[] = $data;
 		}
 
 		$result = new ArrayResult();
