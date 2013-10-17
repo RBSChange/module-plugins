@@ -141,7 +141,7 @@
 		};
 
 		this.activateChange = function (plugin){
-			var base = plugin.activated ? 'commands/change/disable-plugin' : 'commands/change/enable-plugin';
+			var base = !plugin.activated ? 'commands/change/disable-plugin' : 'commands/change/enable-plugin';
 			var url = REST.getBaseUrl(base);
 			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName });
 		};
