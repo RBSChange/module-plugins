@@ -1,6 +1,6 @@
 <div data-ng-controller="Rbs_Plugins_Installed_ListController">
 	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.installed-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
-	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-error': pluginInfos.errors }" data-ng-if="pluginInfos">
+	<div class="alert" data-ng-class="{'alert-success': pluginInfos.success, 'alert-danger': pluginInfos.errors }" data-ng-if="pluginInfos">
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<span ng-bind-html="pluginInfos.message"></span>
 		<ul data-ng-repeat="error in pluginInfos.errors">
