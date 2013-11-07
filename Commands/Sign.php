@@ -17,6 +17,8 @@ class Sign
 		$application = $event->getApplication();
 		$applicationServices = $event->getApplicationServices();
 
+		$response = $event->getCommandResponse();
+
 		$type = $event->getParam('type');
 		$vendor = $event->getParam('vendor');
 		$name = $event->getParam('name');
@@ -37,7 +39,7 @@ class Sign
 
 			if ($plugin === null)
 			{
-				$event->addErrorMessage('Plugin not found.');
+				$response->addErrorMessage('Plugin not found.');
 				return;
 			}
 
@@ -45,15 +47,15 @@ class Sign
 			$result = $signTool->sign($plugin, $key, $cert, $passPhrase);
 			if (!$result)
 			{
-				$event->addErrorMessage('Could not sign plugin.');
+				$response->addErrorMessage('Could not sign plugin.');
 				return;
 			}
-			$event->addInfoMessage('Plugin signed.');
+			$response->addInfoMessage('Plugin signed.');
 		}
 		catch (\Exception $e)
 		{
 			$applicationServices->getLogging()->exception($e);
-			$event->addErrorMessage($e->getMessage());
+			$response->addErrorMessage($e->getMessage());
 		}
 	}
 }

@@ -42,7 +42,10 @@
 			$scope.reloadPlugins();
 		}); };
 
-		$scope.verifyAll = function (){ Plugins.verifyAll($scope.plugins) };
+		$scope.verifyAll = function (){
+			Plugins.verifyAll($scope.plugins).then(function (pluginInfos) {
+				$scope.pluginInfos = pluginInfos;
+			} ) };
 
 		//sort
 		$scope.predicate = 'vendor';

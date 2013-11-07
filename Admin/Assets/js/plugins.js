@@ -1,146 +1,258 @@
-(function ($) {
+(function ($)
+{
 
 	"use strict";
 
 	var app = angular.module('RbsChange');
 
-	function changePluginsServiceFn ($http, $q, i18n, REST, $filter) {
+	function changePluginsServiceFn($http, $q, i18n, REST, $filter)
+	{
 
-		this.getNew = function(){
+		this.getNew = function ()
+		{
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('plugins/newPlugins');
-			$http.get(url).success(function (data){
+			$http.get(url).success(function (data)
+			{
 				deffered.resolve(data);
-			}).error(function (data){
+			}).error(function (data)
+				{
 					deffered.reject(data);
 				});
 			return deffered.promise;
 		};
 
-		this.getRegistered = function(){
+		this.getRegistered = function ()
+		{
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('plugins/registeredPlugins');
-			$http.get(url).success(function (data){
+			$http.get(url).success(function (data)
+			{
 				deffered.resolve(data);
-			}).error(function (data){
+			}).error(function (data)
+				{
 					deffered.reject(data);
 				});
 			return deffered.promise;
 		};
 
-		this.getInstalled = function(){
+		this.getInstalled = function ()
+		{
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('plugins/installedPlugins');
-			$http.get(url).success(function (data){
-					deffered.resolve(data);
-				}).error(function (data){
+			$http.get(url).success(function (data)
+			{
+				deffered.resolve(data);
+			}).error(function (data)
+				{
 					deffered.reject(data);
 				});
 			return deffered.promise;
 		};
 
-		this.verify = function (plugin){
+		this.verify = function (plugin)
+		{
 			plugin.verified = false;
+			plugin.valid = false;
+
+			var messages = new Array();
 			var deffered = $q.defer();
-			var url = REST.getBaseUrl('plugins/verifyPlugin?type=' + plugin.type + '&vendor=' + plugin.vendor +
-				'&name=' + plugin.shortName);
-			$http.get(url).success(function (data){
+			var url = REST.getBaseUrl('commands/rbs_plugins/verify');
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).
+				success(function (r)
+				{
 					var pluginInfos = {};
-					if (data.errors.length == 0 && data.valid)
+					var result = r.result;
+					plugin.verified = true;
+
+					var i18nData = {
+						'name': plugin.shortName,
+						'vendor': plugin.vendor,
+						'type': plugin.type
+					};
+
+					if (result.error && result.error.length > 0)
 					{
-						plugin.verified = true;
-						var i18nSuccessData = {
-							'name': plugin.shortName,
-							'vendor': plugin.vendor,
-							'type': plugin.type,
-							'subject': data.parsing.certificate.subject.CN,
-							'CN': data.parsing.certificate.issuer.CN,
-							'emailAddress': data.parsing.certificate.issuer.emailAddress,
-							'validFrom': $filter('date')(data.parsing.certificate.validFrom_time_t * 1000),
-							'validTo': $filter('date')(data.parsing.certificate.validTo_time_t * 1000)
-						};
-						pluginInfos.success = true;
-						pluginInfos.errors = false;
-						pluginInfos.message = i18n.trans('m.rbs.plugins.admin.js.valid-signature | ucf', i18nSuccessData);
-						deffered.resolve(pluginInfos);
+						plugin.valid = false;
+						messages.push(i18n.trans('m.rbs.plugins.admin.js.invalid-signature | ucf', i18nData));
+						pluginInfos.errors = result.error;
 					}
 					else
 					{
-						plugin.invalid = true;
-						var i18nErrorData = {
-							'name': plugin.shortName,
-							'vendor': plugin.vendor,
-							'type': plugin.type
-						};
-						pluginInfos.success = false;
-						pluginInfos.errors = data.errors;
-						pluginInfos.message = i18n.trans('m.rbs.plugins.admin.js.invalid-signature | ucf', i18nErrorData);
-						deffered.reject(pluginInfos);
+						plugin.valid = true;
+
+						i18nData['subject'] = result.data.subject.CN;
+						i18nData['CN'] = result.data.issuer.CN;
+						i18nData['emailAddress'] = result.data.issuer.emailAddress;
+						i18nData['validFrom'] = $filter('date')(result.data.validFrom_time_t * 1000);
+						i18nData['validTo'] = $filter('date')(result.data.validTo_time_t * 1000);
+
+						messages.push(i18n.trans('m.rbs.plugins.admin.js.valid-signature | ucf', i18nData));
+						messages.push(i18n.trans('m.rbs.plugins.admin.js.certificate-info | ucf', i18nData));
+						messages.push(i18n.trans('m.rbs.plugins.admin.js.certificate-validity | ucf', i18nData));
 					}
-				}
-			).error(function(data){
-					deffered.reject(data);
+
+					pluginInfos.messages = messages;
+					pluginInfos.valid = plugin.valid;
+					pluginInfos.verified = plugin.verified;
+
+					deffered.resolve(pluginInfos);
+				}).
+				error(function (r)
+				{
+					var pluginInfos = {};
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.impossible-to-check | ucf'));
+					pluginInfos.messages = messages;
+					pluginInfos.verified = plugin.verified;
+
+					pluginInfos.errors = new Array(r.message);
+
+					deffered.reject(pluginInfos);
 				});
 			return deffered.promise;
+
 		};
 
-		this.verifyAll = function (plugins){
-			angular.forEach(plugins, function(plugin){
+		this.verifyAll = function (plugins)
+		{
+			var validCount = 0,
+				invalidCount = 0,
+				nocheckCount = 0,
+				promises = [];
+
+			var deffered = $q.defer();
+			var url = REST.getBaseUrl('commands/rbs_plugins/verify');
+
+			angular.forEach(plugins, function (plugin)
+			{
 				plugin.verified = false;
-				var url = REST.getBaseUrl('plugins/verifyPlugin?type=' + plugin.type + '&vendor=' + plugin.vendor +
-					'&name=' + plugin.shortName);
-				$http.get(url).success(function (data){
-						if (data.errors.length == 0)
-						{
-							plugin.verified = data.valid;
-						}
-						else
-						{
-							plugin.invalid = true;
-						}
+
+				var q = $q.defer();
+
+				var p = $http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName });
+				promises.push(q.promise);
+
+				p.success(function (r)
+				{
+					plugin.verified = true;
+
+					var result =  r.result;
+
+					if (result.error)
+					{
+						plugin.valid = false;
+						++invalidCount;
 					}
-				);
+					else
+					{
+						plugin.valid = true;
+						++validCount;
+					}
+
+					q.resolve();
+				}).error(function ()
+				{
+					++nocheckCount;
+					q.resolve();
+				});
 			});
+
+			function displayInfo()
+			{
+				var pluginInfos = {};
+				pluginInfos.valid = true;
+				pluginInfos.verified = false;
+
+				var messages = new Array();
+
+				if (invalidCount > 0 || validCount > 0)
+				{
+					pluginInfos.verified = true;
+				}
+
+				if (invalidCount > 1)
+				{
+					pluginInfos.valid = false;
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.invalid-plugin-count-many | ucf', {'count' : invalidCount}));
+				}
+				else
+				{
+					pluginInfos.valid = false;
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.invalid-plugin-count-one | ucf', {'count' : invalidCount}));
+				}
+				if (validCount > 1)
+				{
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.valid-plugin-count-many | ucf', {'count' : validCount}));
+				}
+				else
+				{
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.valid-plugin-count-one | ucf', {'count' : validCount}));
+				}
+				if (nocheckCount > 1)
+				{
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.impossible-to-check-count-many | ucf', {'count' : nocheckCount}));
+				}
+				else if (nocheckCount == 1)
+				{
+					messages.push(i18n.trans('m.rbs.plugins.admin.js.impossible-to-check-count-one | ucf', {'count' : nocheckCount}));
+				}
+				pluginInfos.messages = messages;
+
+				deffered.resolve(pluginInfos);
+			}
+
+			$q.all(promises).then(displayInfo, displayInfo);
+
+			return deffered.promise;
 		};
 
-		this.register = function (plugin){
+		this.register = function (plugin)
+		{
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('commands/change/register-plugin');
-			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function ()
+			{
 				deffered.resolve();
 			});
 			return deffered.promise;
 		};
 
-		this.deregister = function (plugin){
+		this.deregister = function (plugin)
+		{
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('commands/change/deregister-plugin');
-			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function ()
+			{
 				deffered.resolve();
 			});
 			return deffered.promise;
 		};
 
-		this.install = function (plugin){
+		this.install = function (plugin)
+		{
 			var deffered = $q.defer();
 			plugin.onInstall = true;
 			var url = REST.getBaseUrl('commands/change/install-plugin');
-			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function ()
+			{
 				deffered.resolve();
 			});
 			return deffered.promise;
 		};
 
-		this.deinstall = function (plugin){
+		this.deinstall = function (plugin)
+		{
 			var deffered = $q.defer();
 			var url = REST.getBaseUrl('commands/change/deinstall-plugin');
-			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function (){
+			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName }).success(function ()
+			{
 				deffered.resolve();
 			});
 			return deffered.promise;
 		};
 
-		this.activateChange = function (plugin){
+		this.activateChange = function (plugin)
+		{
 			var base = !plugin.activated ? 'commands/change/disable-plugin' : 'commands/change/enable-plugin';
 			var url = REST.getBaseUrl(base);
 			$http.post(url, { 'type': plugin.type, 'vendor': plugin.vendor, 'name': plugin.shortName });

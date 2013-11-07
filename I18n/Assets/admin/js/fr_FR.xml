@@ -2,9 +2,15 @@
 <i18n baseKey="m.rbs.plugins.admin.js" lcid="fr_FR">
 	<key id="module-name">plugins</key>
 	<key id="module-keywords">modules,plugins,thèmes</key>
-	<key id="invalid-signature" format="html"><![CDATA[<ul class="unstyled"><li>La signature du plugin {name} du fournisseur {vendor} et du type {type} est invalide.</li></ul>]]></key>
-	<key id="valid-signature" format="html"><![CDATA[<ul class="unstyled"><li>La signature du plugin {name} du fournisseur {vendor} et du type {type} est valide.</li>
-	<li>Le certificat qui a signé ce module a été procuré pour {subject} par l'instance de certification {CN} que vous pouvez contacter via cette e-mail : {emailAddress}.</li>
-	<li>Ce certificat est valide depuis le {validFrom} et jusqu'au {validTo}.</li></ul>]]>
-	</key>
+	<key id="invalid-signature">La signature du {type} {name} fournit par {vendor} est invalide.</key>
+	<key id="valid-signature">La signature du {type} {name} fournit par {vendor} est valide.</key>
+	<key id="certificate-info">Le certificat qui a signé ce {type} a été procuré pour {subject} par l'instance de certification {CN} que vous pouvez contacter via cette e-mail : {emailAddress}.</key>
+	<key id="certificate-validity">Ce certificat est valide du {validFrom} au {validTo}.</key>
+	<key id="invalid-plugin-count-many">{count} plugins non valides.</key>
+	<key id="invalid-plugin-count-one">{count} plugin non valide.</key>
+	<key id="valid-plugin-count-many">{count} plugins valides.</key>
+	<key id="valid-plugin-count-one">{count} plugin valide.</key>
+	<key id="impossible-to-check">Impossible de vérifier le plugin.</key>
+	<key id="impossible-to-check-count-many">{count} plugins non vérifiés.</key>
+	<key id="impossible-to-check-count-one">{count} plugin vérifié.</key>
 </i18n>

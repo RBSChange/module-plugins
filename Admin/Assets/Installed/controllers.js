@@ -28,7 +28,8 @@
 
 		$scope.reloadPlugins();
 
-		$scope.verify = function (plugin){ Plugins.verify(plugin).then(function (pluginInfos){
+		$scope.verify = function (plugin){
+			Plugins.verify(plugin).then(function (pluginInfos){
 				$scope.pluginInfos = pluginInfos;
 			}, function (pluginInfos){
 			$scope.pluginInfos = pluginInfos;
@@ -40,7 +41,10 @@
 			$scope.reloadPlugins();
 		}); };
 
-		$scope.verifyAll = function (){ Plugins.verifyAll($scope.plugins) };
+		$scope.verifyAll = function (){
+			Plugins.verifyAll($scope.plugins).then(function (pluginInfos) {
+				$scope.pluginInfos = pluginInfos;
+			} ) };
 
 		//sort
 		$scope.predicate = 'vendor';

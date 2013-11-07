@@ -86,14 +86,18 @@ class Signtool
 		$manifestInfo = $this->buildManifestInfo($plugin->getAbsolutePath($this->application->getWorkspace()));
 		$signedManifestInfo = Json::decode(file_get_contents($manifestPath), Json::TYPE_ARRAY);
 
-		foreach ($signedManifestInfo as $relativePath => $checksum)
+		if ($signedManifestInfo !== null)
 		{
-			if ($manifestInfo[$relativePath] !== $checksum)
+			foreach ($signedManifestInfo as $relativePath => $checksum)
 			{
-				$parsingResult['error'] = array('code' => -2, 'message' => 'The plugin has been tampered');
+				if ($manifestInfo[$relativePath] !== $checksum)
+				{
+					$parsingResult['error'] = array('code' => -2, 'message' => 'The plugin has been tampered');
+				}
+				unset($manifestInfo[$relativePath]);
 			}
-			unset($manifestInfo[$relativePath]);
 		}
+
 		if (count($manifestInfo) !== 0)
 		{
 			$parsingResult['error'] = array('code' => -2, 'message' => 'The plugin has been tampered');

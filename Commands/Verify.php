@@ -17,41 +17,43 @@ class Verify
 		$application = $event->getApplication();
 		$applicationServices = $event->getApplicationServices();
 
+		$response = $event->getCommandResponse();
+
 		$type = $event->getParam('type');
 		$vendor = $event->getParam('vendor');
 		$name = $event->getParam('name');
-		try
+
+		$allPlugins = $applicationServices->getPluginManager()->scanPlugins();
+		$plugins = array_filter($allPlugins, function(\Change\Plugins\Plugin $plugin) use ($type, $vendor, $name) {
+			return $plugin->getType() === $type && $plugin->getVendor() === $vendor && $plugin->getShortName() === $name;
+		});
+		$plugin = array_pop($plugins);
+
+		if ($plugin === null)
 		{
-			if ($type === "theme")
-			{
-				$plugin = $applicationServices->getPluginManager()->getTheme($vendor, $name);
-			}
-			else
-			{
-				$plugin = $applicationServices->getPluginManager()->getModule($vendor, $name);
-			}
-
-			if ($plugin === null)
-			{
-				$event->addErrorMessage("Plugin not found.");
-				return;
-			}
-
-			$signTool = new Signtool($application);
-			$result = $signTool->verify($plugin);
-			if ($result['valid'])
-			{
-				$event->addInfoMessage('Plugin is genuine!');
-			}
-			else
-			{
-				$event->addErrorMessage('Plugin is not genuine.');
-			}
+			$response->addErrorMessage("Plugin not found.");
 		}
-		catch (\Exception $e)
+		else
 		{
-			$applicationServices->getLogging()->exception($e);
-			$event->addErrorMessage($e->getMessage());
+			try
+			{
+				$signTool = new Signtool($application);
+				$signToolResult = $signTool->verify($plugin);
+
+				if ($signToolResult['valid'])
+				{
+					$response->addInfoMessage("Plugin is genuine!");
+					$response->setData($signToolResult['parsing']['certificate']);
+				}
+				else
+				{
+					$response->addErrorMessage("Plugin is not genuine : " . $signToolResult['parsing']['error']['message']);
+				}
+			}
+			catch (\RuntimeException $e)
+			{
+				$response->addErrorMessage("Plugin is not genuine : " . $e->getMessage());
+			}
 		}
 	}
 }
