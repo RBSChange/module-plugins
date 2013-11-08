@@ -26,7 +26,7 @@ class VerifyPlugin
 		if ($type !== '' && $vendor !== '' && $name !== '')
 		{
 			$applicationServices = $event->getApplicationServices();
-			$application = $applicationServices->getApplication();
+			$application = $event->getApplication();
 
 			$signResult = array('errors' => array());
 			try

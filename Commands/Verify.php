@@ -15,7 +15,7 @@ class Verify
 	public function execute(Event $event)
 	{
 		$application = $event->getApplication();
-		$applicationServices = new \Change\Application\ApplicationServices($application);
+		$applicationServices = $event->getApplicationServices();
 
 		$type = $event->getParam('type');
 		$vendor = $event->getParam('vendor');
