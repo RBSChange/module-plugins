@@ -1,0 +1,38 @@
+{
+	"module_name":{
+		"message":"plugins"
+	},
+	"invalid_signature":{
+		"message":"La signature du $TYPE$ $NAME$ fournit par $VENDOR$ est invalide."
+	},
+	"valid_signature":{
+		"message":"La signature du $TYPE$ $NAME$ fournit par $VENDOR$ est valide."
+	},
+	"certificate_info":{
+		"message":"Le certificat qui a signé ce $TYPE$ a été procuré pour $SUBJECT$ par l'instance de certification $CN$ que vous pouvez contacter via cette e-mail : $EMAILADDRESS$."
+	},
+	"certificate_validity":{
+		"message":"Ce certificat est valide du $VALIDFROM$ au $VALIDTO$."
+	},
+	"impossible_to_check":{
+		"message":"Impossible de vérifier le plugin."
+	},
+	"invalid_plugin_count_many":{
+		"message":"$COUNT$ plugins non valides."
+	},
+	"invalid_plugin_count_one":{
+		"message":"$COUNT$ plugin non valide."
+	},
+	"valid_plugin_count_many":{
+		"message":"$COUNT$ plugins valides."
+	},
+	"valid_plugin_count_one":{
+		"message":"$COUNT$ plugin valide."
+	},
+	"impossible_to_check_count_many":{
+		"message":"$COUNT$ plugins non vérifiés."
+	},
+	"impossible_to_check_count_one":{
+		"message":"$COUNT$ plugin vérifié."
+	}
+}

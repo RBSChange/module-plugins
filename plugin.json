@@ -2,5 +2,6 @@
 	"type":"module",
 	"vendor":"Rbs",
 	"name":"Plugins",
-	"package": "Core"
+	"package":"Core",
+	"defaultLCID":"fr_FR"
 }

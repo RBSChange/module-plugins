@@ -1,0 +1,68 @@
+{
+	"module_name":{
+		"message":"plugins"
+	},
+	"module_keywords":{
+		"message":"modules,plugins,thèmes"
+	},
+	"installed_plugin_list_sub_title":{
+		"message":"liste des plugins installés"
+	},
+	"registered_plugin_list_sub_title":{
+		"message":"liste des plugins à installer"
+	},
+	"new_plugin_list_sub_title":{
+		"message":"liste des nouveaux plugins"
+	},
+	"plugin_list":{
+		"message":"plugins"
+	},
+	"installed_list":{
+		"message":"installés"
+	},
+	"registered_list":{
+		"message":"à installer"
+	},
+	"new_list":{
+		"message":"nouveaux"
+	},
+	"type":{
+		"message":"type"
+	},
+	"vendor":{
+		"message":"fournisseur"
+	},
+	"name":{
+		"message":"nom"
+	},
+	"package":{
+		"message":"package"
+	},
+	"registration_date":{
+		"message":"date d'enregistrement"
+	},
+	"installed":{
+		"message":"configuré"
+	},
+	"activated":{
+		"message":"activé"
+	},
+	"deinstall":{
+		"message":"désinstaller"
+	},
+	"install":{
+		"message":"installer"
+	},
+	"verify":{
+		"message":"vérifier"
+	},
+	"verify_all":{
+		"message":"tout vérifier"
+	},
+	"register":{
+		"message":"enregistrer"
+	},
+	"deregister":{
+		"message":"retirer"
+	}
+}

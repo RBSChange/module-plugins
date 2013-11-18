@@ -17,7 +17,7 @@
 	function ListController($scope, Breadcrumb, MainMenu, i18n, Plugins)
 	{
 		Breadcrumb.resetLocation([
-			[i18n.trans('m.rbs.plugins.admin.js.module-name | ucf'), "Rbs/Plugins/Installed"]
+			[i18n.trans('m.rbs.plugins.adminjs.module_name | ucf'), "Rbs/Plugins/Installed"]
 		]);
 
 		$scope.reloadPlugins = function (){

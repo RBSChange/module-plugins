@@ -74,7 +74,7 @@
 					if (result.error && result.error.length > 0)
 					{
 						plugin.valid = false;
-						messages.push(i18n.trans('m.rbs.plugins.admin.js.invalid-signature | ucf', i18nData));
+						messages.push(i18n.trans('m.rbs.plugins.adminjs.invalid_signature | ucf', i18nData));
 						pluginInfos.errors = result.error;
 					}
 					else
@@ -87,9 +87,9 @@
 						i18nData['validFrom'] = $filter('date')(result.data.validFrom_time_t * 1000);
 						i18nData['validTo'] = $filter('date')(result.data.validTo_time_t * 1000);
 
-						messages.push(i18n.trans('m.rbs.plugins.admin.js.valid-signature | ucf', i18nData));
-						messages.push(i18n.trans('m.rbs.plugins.admin.js.certificate-info | ucf', i18nData));
-						messages.push(i18n.trans('m.rbs.plugins.admin.js.certificate-validity | ucf', i18nData));
+						messages.push(i18n.trans('m.rbs.plugins.adminjs.valid_signature | ucf', i18nData));
+						messages.push(i18n.trans('m.rbs.plugins.adminjs.certificate_info | ucf', i18nData));
+						messages.push(i18n.trans('m.rbs.plugins.adminjs.certificate_validity | ucf', i18nData));
 					}
 
 					pluginInfos.messages = messages;
@@ -101,7 +101,7 @@
 				error(function (r)
 				{
 					var pluginInfos = {};
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.impossible-to-check | ucf'));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.impossible_to_check | ucf'));
 					pluginInfos.messages = messages;
 					pluginInfos.verified = plugin.verified;
 
@@ -173,28 +173,28 @@
 				if (invalidCount > 1)
 				{
 					pluginInfos.valid = false;
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.invalid-plugin-count-many | ucf', {'count' : invalidCount}));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.invalid_plugin_count_many | ucf', {'count' : invalidCount}));
 				}
 				else
 				{
 					pluginInfos.valid = false;
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.invalid-plugin-count-one | ucf', {'count' : invalidCount}));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.invalid_plugin_count_one | ucf', {'count' : invalidCount}));
 				}
 				if (validCount > 1)
 				{
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.valid-plugin-count-many | ucf', {'count' : validCount}));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.valid_plugin_count_many | ucf', {'count' : validCount}));
 				}
 				else
 				{
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.valid-plugin-count-one | ucf', {'count' : validCount}));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.valid_plugin_count_one | ucf', {'count' : validCount}));
 				}
 				if (nocheckCount > 1)
 				{
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.impossible-to-check-count-many | ucf', {'count' : nocheckCount}));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.impossible_to_check_count_many | ucf', {'count' : nocheckCount}));
 				}
 				else if (nocheckCount == 1)
 				{
-					messages.push(i18n.trans('m.rbs.plugins.admin.js.impossible-to-check-count-one | ucf', {'count' : nocheckCount}));
+					messages.push(i18n.trans('m.rbs.plugins.adminjs.impossible_to_check_count_one | ucf', {'count' : nocheckCount}));
 				}
 				pluginInfos.messages = messages;
 

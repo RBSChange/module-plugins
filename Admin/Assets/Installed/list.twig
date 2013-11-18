@@ -1,6 +1,6 @@
 <div data-ng-controller="Rbs_Plugins_Installed_ListController">
-	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.installed-plugin-list-sub-title', ['ucf']) }}"></page-header><br />
-	<div class="alert" data-ng-if="pluginInfos" data-ng-class="{'alert-danger': pluginInfos.verified && !pluginInfos.valid, 'alert-success': pluginInfos.verified && pluginInfos.valid, 'alert-warning': !pluginInfos.verified}">
+	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.installed_plugin_list_sub_title', ['ucf']) }}"></page-header><br />
+	<div class="alert" data-ng-if="pluginInfos != null" data-ng-class="{'alert-danger': pluginInfos.verified && !pluginInfos.valid, 'alert-success': pluginInfos.verified && pluginInfos.valid, 'alert-warning': !pluginInfos.verified}">
 		<button type="button" class="close" data-dismiss="alert">×</button>
 		<ul data-ng-repeat="pMessage in pluginInfos.messages">
 			<li>(= pMessage =)</li>
@@ -42,7 +42,7 @@
 				</th>
 				<th data-ng-class="{'sorted':isSortedOn('registrationDate')}">
 					<a href="" data-ng-click="predicate = 'registrationDate'; reverse=!reverse">
-						{{ i18n('m.rbs.plugins.admin.registration-date', ['ucf']) }}
+						{{ i18n('m.rbs.plugins.admin.registration_date', ['ucf']) }}
 					</a>
 					<i data-ng-if="!isSortedOn('registrationDate')" class="column-sort-indicator icon-sort"></i>
 					<i data-ng-if="isSortedOn('registrationDate')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
@@ -54,7 +54,7 @@
 					<i data-ng-if="!isSortedOn('activated')" class="column-sort-indicator icon-sort"></i>
 					<i data-ng-if="isSortedOn('activated')" data-ng-class="{true:'icon-sort-down', false:'icon-sort-up'}[reverse]"></i>
 				</th>
-				<th align="center"><button class="btn btn-default btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify-all', ['ucf']) }}</button></th>
+				<th align="center"><button class="btn btn-default btn-sm" data-ng-click="verifyAll()">{{ i18n('m.rbs.plugins.admin.verify_all', ['ucf']) }}</button></th>
 				<th></th>
 			</tr>
 		</thead>
