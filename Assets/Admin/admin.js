@@ -9,9 +9,9 @@
 		$provide.decorator('RbsChange.UrlManager', ['$delegate', function ($delegate)
 		{
 			$delegate.model('Rbs_Plugins')
-				.route('Installed', 'Rbs/Plugins/Installed/', { 'templateUrl': 'Rbs/Plugins/Installed/list.twig'})
-				.route('Registered', 'Rbs/Plugins/Registered/', { 'templateUrl': 'Rbs/Plugins/Registered/list.twig'})
-				.route('New', 'Rbs/Plugins/New/', { 'templateUrl': 'Rbs/Plugins/New/list.twig'});
+				.route('Installed', 'Rbs/Plugins/Installed/', { 'templateUrl': 'Rbs/Plugins/installed-list.twig'})
+				.route('Registered', 'Rbs/Plugins/Registered/', { 'templateUrl': 'Rbs/Plugins/registered-list.twig'})
+				.route('New', 'Rbs/Plugins/New/', { 'templateUrl': 'Rbs/Plugins/new-list.twig'});
 			return $delegate;
 		}]);
 	}]);
