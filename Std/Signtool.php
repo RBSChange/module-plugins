@@ -44,13 +44,13 @@ class Signtool
 	{
 		$normalizedPrivateKeyPath = (DIRECTORY_SEPARATOR == '/' ? \Zend\Uri\File::fromUnixPath(realpath($privateKeyPath)) : \Zend\Uri\File::fromWindowsPath(realpath($privateKeyPath)));
 		$normalizedCertPath = (DIRECTORY_SEPARATOR == '/' ? \Zend\Uri\File::fromUnixPath(realpath($certPath)) : \Zend\Uri\File::fromWindowsPath(realpath($certPath)));
-		$path = $plugin->getAbsolutePath($this->application->getWorkspace());
+		$path = $plugin->getAbsolutePath();
 		$manifestPath = tempnam($this->application->getWorkspace()->tmpPath(), 'manifest');
 		$manifestInfo = $this->buildManifestInfo($path);
 		File::write($manifestPath, Json::prettyPrint(Json::encode($manifestInfo)));
 		return openssl_pkcs7_sign(
 			$manifestPath,
-			$plugin->getAbsolutePath($this->application->getWorkspace()) . DIRECTORY_SEPARATOR . ".signature.smime",
+			$plugin->getAbsolutePath() . DIRECTORY_SEPARATOR . ".signature.smime",
 			$normalizedCertPath->toString(),
 			array($normalizedPrivateKeyPath->toString(), $passPhrase),
 			array()
@@ -64,7 +64,7 @@ class Signtool
 	 */
 	public function verify(Plugin $plugin, &$parsingResult = array())
 	{
-		$signatureFilePath = $plugin->getAbsolutePath($this->application->getWorkspace()) . DIRECTORY_SEPARATOR . ".signature.smime";
+		$signatureFilePath = $plugin->getAbsolutePath() . DIRECTORY_SEPARATOR . ".signature.smime";
 		if (!is_readable($signatureFilePath))
 		{
 			throw new \RuntimeException('Signature file not found (path = ' . $signatureFilePath . ')');
@@ -83,7 +83,7 @@ class Signtool
 		{
 			$parsingResult['error'] = array('code' => -1, 'message' => 'The plugin signature has been tampered');
 		}
-		$manifestInfo = $this->buildManifestInfo($plugin->getAbsolutePath($this->application->getWorkspace()));
+		$manifestInfo = $this->buildManifestInfo($plugin->getAbsolutePath());
 		$signedManifestInfo = Json::decode(file_get_contents($manifestPath), Json::TYPE_ARRAY);
 
 		if ($signedManifestInfo !== null)
