@@ -1,38 +1,35 @@
 {
-	"module_name":{
-		"message":"plugins"
-	},
-	"invalid_signature": {
-		"message": "$TYPE$ $NAME$ signature provided by $VENDOR$ is invalid."
-	},
-	"valid_signature": {
-		"message": "$TYPE$ $NAME$ signature provided by $VENDOR$ is valid."
-	},
-	"certificate_info":{
-		"message":"This $TYPE$ has been signed with a certificate attributed to $SUBJECT$ by $CN$ with the following e-mail address $EMAILADDRESS$."
-	},
-	"certificate_validity":{
-		"message":"This certificate is valid between $VALIDFROM$ and $VALIDTO$."
-	},
-	"impossible_to_check":{
-		"message":"Impossible to check the plugin."
-	},
-	"invalid_plugin_count_many":{
-		"message":"$COUNT$ plugins not valid."
-	},
-	"invalid_plugin_count_one":{
-		"message":"$COUNT$ plugin not valid."
-	},
-	"valid_plugin_count_many":{
-		"message":"$COUNT$ plugins valid."
-	},
-	"valid_plugin_count_one":{
-		"message":"$COUNT$ plugin valid."
-	},
-	"impossible_to_check_count_many":{
-		"message":"$COUNT$ plugins not checked."
-	},
-	"impossible_to_check_count_one":{
-		"message":"$COUNT$ plugin checked."
-	}
+  "invalid_signature":{
+    "message":"$TYPE$ $NAME$ signature provided by $VENDOR$ is invalid."
+  },
+  "valid_signature":{
+    "message":"$TYPE$ $NAME$ signature provided by $VENDOR$ is valid."
+  },
+  "certificate_info":{
+    "message":"This $TYPE$ has been signed with a certificate attributed to $SUBJECT$ by $CN$ with the following e-mail address $EMAILADDRESS$."
+  },
+  "certificate_validity":{
+    "message":"This certificate is valid between $VALIDFROM$ and $VALIDTO$."
+  },
+  "impossible_to_check":{
+    "message":"Impossible to check the plugin."
+  },
+  "invalid_plugin_count_many":{
+    "message":"$COUNT$ plugins not valid."
+  },
+  "invalid_plugin_count_one":{
+    "message":"$COUNT$ plugin not valid."
+  },
+  "valid_plugin_count_many":{
+    "message":"$COUNT$ plugins valid."
+  },
+  "valid_plugin_count_one":{
+    "message":"$COUNT$ plugin valid."
+  },
+  "impossible_to_check_count_many":{
+    "message":"$COUNT$ plugins not checked."
+  },
+  "impossible_to_check_count_one":{
+    "message":"$COUNT$ plugin checked."
+  }
 }

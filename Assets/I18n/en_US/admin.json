@@ -1,68 +1,56 @@
 {
-	"module_name":{
-		"message":"plugins"
-	},
-	"module_keywords":{
-		"message":"modules,plugins,themes"
-	},
-	"installed_plugin_list_sub_title":{
-		"message":"installed plugins"
-	},
-	"registered_plugin_list_sub_title":{
-		"message":"registered plugins"
-	},
-	"new_plugin_list_sub_title":{
-		"message":"new plugins"
-	},
-	"plugin_list":{
-		"message":"plugins"
-	},
-	"installed_list":{
-		"message":"installed"
-	},
-	"registered_list":{
-		"message":"registered"
-	},
-	"new_list":{
-		"message":"new"
-	},
-	"type":{
-		"message":"type"
-	},
-	"vendor":{
-		"message":"vendor"
-	},
-	"name":{
-		"message":"name"
-	},
-	"package":{
-		"message":"package"
-	},
-	"registration_date":{
-		"message":"registration date"
-	},
-	"installed":{
-		"message":"installed"
-	},
-	"activated":{
-		"message":"activated"
-	},
-	"deinstall":{
-		"message":"uninstall"
-	},
-	"install":{
-		"message":"install"
-	},
-	"verify":{
-		"message":"verify"
-	},
-	"verify_all":{
-		"message":"verify everything"
-	},
-	"register":{
-		"message":"register"
-	},
-	"deregister":{
-		"message":"unregister"
-	}
+  "module_keywords":{
+    "message":"modules,plugins,themes"
+  },
+  "installed_plugin_list_sub_title":{
+    "message":"installed plugins"
+  },
+  "registered_plugin_list_sub_title":{
+    "message":"registered plugins"
+  },
+  "new_plugin_list_sub_title":{
+    "message":"new plugins"
+  },
+  "installed_list":{
+    "message":"installed"
+  },
+  "registered_list":{
+    "message":"registered"
+  },
+  "new_list":{
+    "message":"new"
+  },
+  "vendor":{
+    "message":"vendor"
+  },
+  "name":{
+    "message":"name"
+  },
+  "registration_date":{
+    "message":"registration date"
+  },
+  "installed":{
+    "message":"installed"
+  },
+  "activated":{
+    "message":"activated"
+  },
+  "deinstall":{
+    "message":"uninstall"
+  },
+  "install":{
+    "message":"install"
+  },
+  "verify":{
+    "message":"verify"
+  },
+  "verify_all":{
+    "message":"verify everything"
+  },
+  "register":{
+    "message":"register"
+  },
+  "deregister":{
+    "message":"unregister"
+  }
 }
