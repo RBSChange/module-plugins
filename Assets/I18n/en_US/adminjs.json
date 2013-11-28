@@ -1,9 +1,6 @@
 {
-  "invalid_signature":{
-    "message":"$TYPE$ $NAME$ signature provided by $VENDOR$ is invalid."
-  },
-  "valid_signature":{
-    "message":"$TYPE$ $NAME$ signature provided by $VENDOR$ is valid."
+  "module_name":{
+    "message":"plugins"
   },
   "certificate_info":{
     "message":"This $TYPE$ has been signed with a certificate attributed to $SUBJECT$ by $CN$ with the following e-mail address $EMAILADDRESS$."
@@ -28,8 +25,5 @@
   },
   "impossible_to_check_count_many":{
     "message":"$COUNT$ plugins not checked."
-  },
-  "impossible_to_check_count_one":{
-    "message":"$COUNT$ plugin checked."
   }
 }
