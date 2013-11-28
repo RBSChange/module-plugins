@@ -12,10 +12,10 @@
 		"message":"aucun plugin à vérifier"
 	},
 	"invalid_signature":{
-		"message":"La signature du $TYPE$ $NAME$ fournit par $VENDOR$ est invalide."
+		"message":"La signature du $TYPE$ $NAME$ fournie par $VENDOR$ est invalide."
 	},
 	"valid_signature":{
-		"message":"La signature du $TYPE$ $NAME$ fournit par $VENDOR$ est valide."
+		"message":"La signature du $TYPE$ $NAME$ fournie par $VENDOR$ est valide."
 	},
 	"certificate_info":{
 		"message":"Le certificat qui a signé ce $TYPE$ a été procuré pour $SUBJECT$ par l'instance de certification $CN$ que vous pouvez contacter via cette e-mail : $EMAILADDRESS$."
