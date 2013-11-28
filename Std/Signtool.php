@@ -23,6 +23,7 @@ class Signtool
 
 	/**
 	 * @param \Change\Application $application
+	 * @throws \RuntimeException
 	 */
 	function __construct(\Change\Application $application)
 	{
@@ -59,6 +60,7 @@ class Signtool
 
 	/**
 	 * @param Plugin $plugin
+	 * @param array $parsingResult
 	 * @throws \RuntimeException
 	 * @return array
 	 */
@@ -67,7 +69,7 @@ class Signtool
 		$signatureFilePath = $plugin->getAbsolutePath() . DIRECTORY_SEPARATOR . ".signature.smime";
 		if (!is_readable($signatureFilePath))
 		{
-			throw new \RuntimeException('Signature file not found (path = ' . $signatureFilePath . ')');
+			throw new \RuntimeException('Signature file not found (path = ' . $signatureFilePath . ')', 999999);
 		}
 		$pemPath = $this->application->getWorkspace()->pluginsModulesPath('Rbs', 'Plugins', 'Assets', 'rbschangeca.pem');
 		$certificatePath = tempnam($this->application->getWorkspace()->tmpPath(), 'certificate');
@@ -110,7 +112,6 @@ class Signtool
 
 	/**
 	 * @param $path
-	 * @param $manifestInfo
 	 * @return mixed
 	 */
 	protected function buildManifestInfo($path)

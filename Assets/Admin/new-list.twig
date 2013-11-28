@@ -1,14 +1,5 @@
-<div data-ng-controller="Rbs_Plugins_Registered_ListController">
+<div data-ng-controller="Rbs_Plugins_New_ListController">
 	<page-header title="{{ i18nAttr('m.rbs.plugins.admin.new_plugin_list_sub_title', ['ucf']) }}"></page-header><br />
-	<div class="alert" data-ng-if="pluginInfos != null" data-ng-class="{'alert-danger': pluginInfos.verified && !pluginInfos.valid, 'alert-success': pluginInfos.verified && pluginInfos.valid, 'alert-warning': !pluginInfos.verified}">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<ul data-ng-repeat="pMessage in pluginInfos.messages">
-			<li>(= pMessage =)</li>
-		</ul>
-		<ul data-ng-repeat="pErrors in pluginInfos.errors">
-			<li>(= pErrors =)</li>
-		</ul>
-	</div>
 	<table class="document-list table table-condensed table-bordered table-striped table-hover token">
 		<thead>
 			<tr>
