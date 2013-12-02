@@ -48,36 +48,36 @@
 		"message":"enregistrement d'un plugin"
 	},
 	"plugin_not_registered":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ n'a pas pu être enregistré"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être enregistré"
 	},
 	"plugin_registered":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ a été enregistré"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été enregistré"
 	},
 	"deregister_title":{
 		"message":"désenregistrement d'un plugin"
 	},
 	"plugin_not_deregistered":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ n'a pas pu être désenregistré"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être désenregistré"
 	},
 	"plugin_deregistered":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ a été désenregistré"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été désenregistré"
 	},
 	"install_title":{
 		"message":"installation d'un plugin"
 	},
 	"plugin_not_installed":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ n'a pas pu être installé"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être installé"
 	},
 	"plugin_installed":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ a été installé"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été installé"
 	},
 	"deinstall_title":{
 		"message":"désinstallation d'un plugin"
 	},
 	"plugin_not_deinstalled":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ n'a pas pu être désinstallé"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être désinstallé"
 	},
 	"plugin_deinstalled":{
-		"message":"le $TYPE$ $NAME$ fournit par $VENDOR$ a été désinstallé"
+		"message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été désinstallé"
 	}
 }
