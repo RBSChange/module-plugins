@@ -2,6 +2,21 @@
   "module_name":{
     "message":"plugins"
   },
+  "check_all_plugin_title":{
+    "message":"plugins verification"
+  },
+  "check_plugin_title":{
+    "message":"plugin checking"
+  },
+  "no_plugin_to_check":{
+    "message":"no plugin to check"
+  },
+  "invalid_signature":{
+    "message":"$TYPE$ $NAME$ signature provided by $VENDOR$ is invalid."
+  },
+  "valid_signature":{
+    "message":"$TYPE$ $NAME$ signature provided by $VENDOR$ is valid."
+  },
   "certificate_info":{
     "message":"This $TYPE$ has been signed with a certificate attributed to $SUBJECT$ by $CN$ with the following e-mail address $EMAILADDRESS$."
   },
@@ -25,5 +40,44 @@
   },
   "impossible_to_check_count_many":{
     "message":"$COUNT$ plugins not checked."
+  },
+  "impossible_to_check_count_one":{
+    "message":"$COUNT$ plugins not checked."
+  },
+  "register_title":{
+    "message":"plugin registration"
+  },
+  "plugin_not_registered":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être enregistré"
+  },
+  "plugin_registered":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été enregistré"
+  },
+  "deregister_title":{
+    "message":"plugin deregistration"
+  },
+  "plugin_not_deregistered":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être désenregistré"
+  },
+  "plugin_deregistered":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été désenregistré"
+  },
+  "install_title":{
+    "message":"plugin installation"
+  },
+  "plugin_not_installed":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être installé"
+  },
+  "plugin_installed":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été installé"
+  },
+  "deinstall_title":{
+    "message":"plugin uninstall"
+  },
+  "plugin_not_deinstalled":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ n'a pas pu être désinstallé"
+  },
+  "plugin_deinstalled":{
+    "message":"le $TYPE$ $NAME$ fourni par $VENDOR$ a été désinstallé"
   }
 }
