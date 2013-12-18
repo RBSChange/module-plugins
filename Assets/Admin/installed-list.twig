@@ -2,8 +2,8 @@
 
 	<rbs-workspace-config>
 		<rbs-breadcrumb-config>
-			<location href="(= 'Rbs_Plugins'|rbsURL:'home' =)">{{ i18n('m.rbs.plugins.admin.module_name', ['ucf']) }}</location>
-			<location href="Rbs/Plugins/Installed">{{ i18nAttr('m.rbs.plugins.admin.installed_list', ['ucf']) }}</location>
+			<rbs-location href="(= 'Rbs_Plugins'|rbsURL:'home' =)">{{ i18n('m.rbs.plugins.admin.module_name', ['ucf']) }}</rbs-location>
+			<rbs-location href="Rbs/Plugins/Installed">{{ i18nAttr('m.rbs.plugins.admin.installed_list', ['ucf']) }}</rbs-location>
 		</rbs-breadcrumb-config>
 	</rbs-workspace-config>
 
@@ -12,7 +12,7 @@
 	</div>
 
 	<div rbs-main-column>
-		<page-header title="{{ i18nAttr('m.rbs.plugins.admin.installed_plugin_list_sub_title', ['ucf']) }}"></page-header><br />
+		<rbs-page-header title="{{ i18nAttr('m.rbs.plugins.admin.installed_plugin_list_sub_title', ['ucf']) }}"></rbs-page-header><br />
 		<table class="document-list table table-condensed table-bordered table-striped table-hover token">
 			<thead>
 				<tr>
@@ -69,7 +69,7 @@
 					<td>(= plugin.shortName =)</td>
 					<td>(= plugin.package =)</td>
 					<td>(= plugin.registrationDate | date:'medium' =)</td>
-					<td><switch data-ng-model="plugin.activated" data-ng-change="activateChange(plugin)" ng-disabled="plugin.configuration.locked"></switch></td>
+					<td><rbs-switch data-ng-model="plugin.activated" data-ng-change="activateChange(plugin)" ng-disabled="plugin.configuration.locked"></rbs-switch></td>
 					<td align="center">
 						<button class="btn btn-sm" data-ng-click="verify(plugin)" data-ng-class="{ 'btn-warning': !plugin.verified, 'btn-success': plugin.verified && plugin.valid, 'btn-danger': plugin.verified && !plugin.valid }">
 							<i class="icon-white icon-ok" data-ng-if="plugin.valid"></i>

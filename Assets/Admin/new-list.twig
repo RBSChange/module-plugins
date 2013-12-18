@@ -1,8 +1,8 @@
 <div class="row" ng-controller="Rbs_Plugins_New_ListController">
 	<rbs-workspace-config>
 		<rbs-breadcrumb-config>
-			<location href="(= 'Rbs_Plugins'|rbsURL:'home' =)">{{ i18n('m.rbs.plugins.admin.module_name', ['ucf']) }}</location>
-			<location href="Rbs/Plugins/New/">{{ i18nAttr('m.rbs.plugins.admin.new_list', ['ucf']) }}</location>
+			<rbs-location href="(= 'Rbs_Plugins'|rbsURL:'home' =)">{{ i18n('m.rbs.plugins.admin.module_name', ['ucf']) }}</rbs-location>
+			<rbs-location href="Rbs/Plugins/New/">{{ i18nAttr('m.rbs.plugins.admin.new_list', ['ucf']) }}</rbs-location>
 		</rbs-breadcrumb-config>
 	</rbs-workspace-config>
 
@@ -11,7 +11,7 @@
 	</div>
 
 	<div rbs-main-column>
-		<page-header title="{{ i18nAttr('m.rbs.plugins.admin.new_plugin_list_sub_title', ['ucf']) }}"></page-header><br />
+		<rbs-page-header title="{{ i18nAttr('m.rbs.plugins.admin.new_plugin_list_sub_title', ['ucf']) }}"></rbs-page-header><br />
 		<table class="document-list table table-condensed table-bordered table-striped table-hover token">
 			<thead>
 				<tr>
