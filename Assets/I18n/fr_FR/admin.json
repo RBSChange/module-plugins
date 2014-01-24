@@ -18,13 +18,13 @@
 		"message":"plugins"
 	},
 	"installed_list":{
-		"message":"installés"
+		"message":"plugins installés"
 	},
 	"registered_list":{
-		"message":"à installer"
+		"message":"plugins à installer"
 	},
 	"new_list":{
-		"message":"nouveaux"
+		"message":"nouveaux plugins"
 	},
 	"type":{
 		"message":"type"
