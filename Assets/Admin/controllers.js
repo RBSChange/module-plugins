@@ -1,5 +1,4 @@
-(function ()
-{
+(function () {
 	"use strict";
 
 	var app = angular.module('RbsChange');
@@ -8,169 +7,152 @@
 	 * Controller for list.
 	 *
 	 * @param $scope
-	 * @param Breadcrumb
 	 * @param MainMenu
-	 * @param i18n
 	 * @param Plugins
 	 * @constructor
 	 */
-	function NewListController($scope,Breadcrumb, MainMenu, i18n, Plugins)
-	{
-		Breadcrumb.resetLocation([
-			[i18n.trans('m.rbs.plugins.adminjs.module_name | ucf'), "Rbs/Plugins/New"]
-		]);
-
-		$scope.reloadPlugins = function (){
+	function NewListController($scope, MainMenu, Plugins) {
+		$scope.reloadPlugins = function () {
 			Plugins.getNew()
-				.then(function (data){
+				.then(function (data) {
 					$scope.plugins = data;
 				});
 		};
 
 		$scope.reloadPlugins();
 
-		$scope.register = function (plugin){
+		$scope.register = function (plugin) {
 			Plugins.register(plugin)
-				.then(function (){
+				.then(function () {
 					$scope.reloadPlugins();
 				});
 		};
 
-		$scope.verify = function (plugin)
-		{
+		$scope.verify = function (plugin) {
 			Plugins.verify(plugin);
 		};
 
-		$scope.verifyAll = function (){
+		$scope.verifyAll = function () {
 			Plugins.verifyAll($scope.plugins)
 		};
 
 		//sort
 		$scope.predicate = 'vendor';
 		$scope.reverse = false;
-		$scope.isSortedOn = function (column) { return column == $scope.predicate; };
+		$scope.isSortedOn = function (column) {
+			return column == $scope.predicate;
+		};
 
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}
 
-	NewListController.$inject = ['$scope', 'RbsChange.Breadcrumb', 'RbsChange.MainMenu', 'RbsChange.i18n', 'RbsChange.Plugins'];
+	NewListController.$inject = ['$scope', 'RbsChange.MainMenu', 'RbsChange.Plugins'];
 	app.controller('Rbs_Plugins_New_ListController', NewListController);
 
 	/**
 	 * Controller for list.
 	 *
 	 * @param $scope
-	 * @param Breadcrumb
 	 * @param MainMenu
-	 * @param i18n
 	 * @param Plugins
 	 * @constructor
 	 */
-	function RegisteredListController($scope, Breadcrumb, MainMenu, i18n, Plugins)
-	{
-		Breadcrumb.resetLocation([
-			[i18n.trans('m.rbs.plugins.adminjs.module_name | ucf'), "Rbs/Plugins/Registered"]
-		]);
+	function RegisteredListController($scope, MainMenu, Plugins) {
 
-		$scope.reloadPlugins = function (){
+		$scope.reloadPlugins = function () {
 			Plugins.getRegistered()
-				.then(function (data){
+				.then(function (data) {
 					$scope.plugins = data;
 				});
 		};
 
 		$scope.reloadPlugins();
 
-		$scope.install = function (plugin)
-		{
+		$scope.install = function (plugin) {
 			Plugins.install(plugin)
-				.then(function (){
+				.then(function () {
 					$scope.reloadPlugins();
 				});
 		};
 
-		$scope.deregister = function (plugin)
-		{
+		$scope.deregister = function (plugin) {
 			Plugins.deregister(plugin)
-				.then(function (){
+				.then(function () {
 					$scope.reloadPlugins();
 				});
 		};
 
-		$scope.verify = function (plugin)
-		{
+		$scope.verify = function (plugin) {
 			Plugins.verify(plugin);
 		};
 
-		$scope.verifyAll = function (){
+		$scope.verifyAll = function () {
 			Plugins.verifyAll($scope.plugins)
 		};
 
 		//sort
 		$scope.predicate = 'vendor';
 		$scope.reverse = false;
-		$scope.isSortedOn = function (column) { return column == $scope.predicate; };
+		$scope.isSortedOn = function (column) {
+			return column == $scope.predicate;
+		};
 
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}
 
-	RegisteredListController.$inject = ['$scope', 'RbsChange.Breadcrumb', 'RbsChange.MainMenu', 'RbsChange.i18n', 'RbsChange.Plugins'];
+	RegisteredListController.$inject =
+		['$scope', 'RbsChange.MainMenu', 'RbsChange.Plugins'];
 	app.controller('Rbs_Plugins_Registered_ListController', RegisteredListController);
 
 	/**
 	 * Controller for list.
 	 *
 	 * @param $scope
-	 * @param Breadcrumb
 	 * @param MainMenu
-	 * @param i18n
 	 * @param Plugins
 	 * @constructor
 	 */
-	function InstalledListController($scope, Breadcrumb, MainMenu, i18n, Plugins)
-	{
-		Breadcrumb.resetLocation([
-			[i18n.trans('m.rbs.plugins.adminjs.module_name | ucf'), "Rbs/Plugins/Installed"]
-		]);
+	function InstalledListController($scope, MainMenu, Plugins) {
 
-		$scope.reloadPlugins = function (){
-			Plugins.getInstalled().then(function (data){
+		$scope.reloadPlugins = function () {
+			Plugins.getInstalled().then(function (data) {
 				$scope.plugins = data;
 			});
 		};
 
 		$scope.reloadPlugins();
 
-		$scope.activateChange = function (plugin)
-		{
+		$scope.activateChange = function (plugin) {
 			Plugins.activateChange(plugin);
 		};
 
-		$scope.deinstall = function (plugin){
+		$scope.deinstall = function (plugin) {
 			Plugins.deinstall(plugin)
-				.then(function (){
+				.then(function () {
 					$scope.reloadPlugins();
 				});
 		};
 
-		$scope.verify = function (plugin)
-		{
+		$scope.verify = function (plugin) {
 			Plugins.verify(plugin);
 		};
 
-		$scope.verifyAll = function (){
+		$scope.verifyAll = function () {
 			Plugins.verifyAll($scope.plugins)
 		};
 
 		//sort
 		$scope.predicate = 'vendor';
 		$scope.reverse = false;
-		$scope.isSortedOn = function (column) { return column == $scope.predicate; };
+		$scope.isSortedOn = function (column) {
+			return column == $scope.predicate;
+		};
 
 		MainMenu.loadModuleMenu('Rbs_Plugins');
 	}
 
-	InstalledListController.$inject = ['$scope', 'RbsChange.Breadcrumb', 'RbsChange.MainMenu', 'RbsChange.i18n', 'RbsChange.Plugins'];
+	InstalledListController.$inject =
+		['$scope', 'RbsChange.MainMenu', 'RbsChange.Plugins'];
 	app.controller('Rbs_Plugins_Installed_ListController', InstalledListController);
 
 })();
