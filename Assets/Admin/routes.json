@@ -1,0 +1,10 @@
+{
+	"/Rbs/Plugins/": {
+		"module": "Rbs_Plugins",
+		"name": "home",
+		"rule": {
+			"redirectTo": "/404"
+		},
+		"auto": true
+	}
+}
