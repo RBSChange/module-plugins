@@ -5,6 +5,6 @@
 		"rule": {
 			"redirectTo": "/404"
 		},
-		"auto": true
+		"auto": false
 	}
 }
