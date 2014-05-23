@@ -8,9 +8,10 @@
  */
 namespace Rbs\Plugins\Http\Rest;
 
-use Change\Http\Rest\Actions\DiscoverNameSpace;
-use Change\Http\Rest\Resolver;
 use Change\Http\Rest\Request;
+use Change\Http\Rest\V1\DiscoverNameSpace;
+use Change\Http\Rest\V1\Resolver;
+use Rbs\Plugins\Http\Rest\Actions\ChangePluginActivation;
 use Rbs\Plugins\Http\Rest\Actions\DeinstallPlugin;
 use Rbs\Plugins\Http\Rest\Actions\DeregisterPlugin;
 use Rbs\Plugins\Http\Rest\Actions\GetInstalledPlugins;
@@ -19,7 +20,6 @@ use Rbs\Plugins\Http\Rest\Actions\GetRegisteredPlugins;
 use Rbs\Plugins\Http\Rest\Actions\InstallPlugin;
 use Rbs\Plugins\Http\Rest\Actions\RegisterPlugin;
 use Rbs\Plugins\Http\Rest\Actions\VerifyPlugin;
-use Rbs\Plugins\Http\Rest\Actions\ChangePluginActivation;
 
 /**
  * @name \Rbs\Plugins\Http\Rest\PluginsResolver
@@ -27,12 +27,12 @@ use Rbs\Plugins\Http\Rest\Actions\ChangePluginActivation;
 class PluginsResolver
 {
 	/**
-	 * @param \Change\Http\Rest\Resolver $resolver
+	 * @param \Change\Http\Rest\V1\Resolver $resolver
 	 */
 	protected $resolver;
 
 	/**
-	 * @param \Change\Http\Rest\Resolver $resolver
+	 * @param \Change\Http\Rest\V1\Resolver $resolver
 	 */
 	function __construct(Resolver $resolver)
 	{
